@@ -6,12 +6,12 @@ import {ERC20} from "solmate/src/mixins/ERC4626.sol";
 import {DrexMock} from "./DrexMock.sol";
 import {Owned} from "solmate/src/auth/Owned.sol";
 
-contract MultiTesourarias is ERC721, Owned {
+contract TesouroDireitoTokenizado is ERC721, Owned {
     /*//////////////////////////////////////////////////////////////
                                 STORAGE
     //////////////////////////////////////////////////////////////*/
 
-    uint256 private currentId;
+    uint256 public currentId;
 
     mapping(uint256 => Deposito) public depositos;
 
@@ -21,7 +21,7 @@ contract MultiTesourarias is ERC721, Owned {
     uint256 internal _fundos;
     uint256 internal _participacoes;
 
-    DrexMock private immutable _drex;
+    DrexMock private _drex;
 
     /// @notice 1 ponto = 1e12 = 100%
     uint256 private constant _PONTOS_BASE = 1e12;
@@ -30,9 +30,7 @@ contract MultiTesourarias is ERC721, Owned {
                                 CONSTRUCTOR
     //////////////////////////////////////////////////////////////*/
 
-    constructor(address _drexContract) ERC721("MultiTesourarias", "MTS") Owned(msg.sender) {
-        _drex = DrexMock(_drexContract);
-
+    constructor() ERC721("MultiTesourarias", "MTS") Owned(msg.sender) {
         multiplicador[0] = 0;
     }
 
@@ -45,10 +43,14 @@ contract MultiTesourarias is ERC721, Owned {
         uint256 multiplicador;
     }
 
+    function setarDrex(DrexMock drex) external onlyOwner {
+        _drex = drex;
+    }
+
     function depositar(uint256 duracao, uint256 amount) public returns (uint256 shares) {
         require(amount > 0, "MultiTesourarias: Deposito minimo de 1 DREX");
 
-        if (duracao != 0 && duracao % 365 != 0) {
+        if (duracao != 0 && duracao % 365 days != 0) {
             revert("MultiTesourarias: Duracao invalida");
         }
 
@@ -71,11 +73,16 @@ contract MultiTesourarias is ERC721, Owned {
     }
 
     function retirar(uint256 idDeposito) public returns (uint256 amount) {
+        require(ownerOf(idDeposito) == msg.sender, "MultiTesourarias: Apenas o dono do deposito pode retirar");
+
         Deposito memory deposito = depositos[idDeposito];
 
         require(deposito.shares > 0, "MultiTesourarias: Nao ha participacoes disponiveis");
 
         amount = convertToAssets(deposito.shares);
+
+        _fundos -= amount;
+        _participacoes -= deposito.shares;
 
         if (deposito.liquidoApos != deposito.momentoDeposito) {
             uint256 multiplicador_ = deposito.multiplicador;
@@ -98,7 +105,7 @@ contract MultiTesourarias is ERC721, Owned {
         _fundos += quantidadeDrex;
     }
 
-    function ajustarMultiplicadores(uint256[] memory duracoes, uint256[] memory multiplicadores) external {
+    function ajustarMultiplicadores(uint256[] memory duracoes, uint256[] memory multiplicadores) external onlyOwner {
         require(duracoes.length == multiplicadores.length, "MultiTesourarias: Arrays de tamanhos diferentes");
 
         for (uint256 i = 0; i < duracoes.length; i++) {
@@ -120,11 +127,19 @@ contract MultiTesourarias is ERC721, Owned {
         return _participacoes;
     }
 
-    function convertToShares(uint256 amount) public view returns (uint256 shares) {
-        shares = (amount * _participacoes) / _fundos;
+    function previewDeposit(uint256 assets) public view virtual returns (uint256) {
+        return convertToShares(assets);
     }
 
-    function convertToAssets(uint256 shares) public view returns (uint256 amount) {
-        amount = (shares * _fundos) / _participacoes;
+    function convertToShares(uint256 assets) public view virtual returns (uint256) {
+        uint256 supply = _participacoes; // Saves an extra SLOAD if totalSupply is non-zero.
+
+        return supply == 0 ? assets : (assets*supply) / totalAssets();
+    }
+
+    function convertToAssets(uint256 shares) public view returns (uint256) {
+        uint256 supply = _participacoes; // Saves an extra SLOAD if totalSupply is non-zero.
+
+        return supply == 0 ? shares : (shares*totalAssets())/ supply;
     }
 }
