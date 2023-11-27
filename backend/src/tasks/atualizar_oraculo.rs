@@ -1,4 +1,3 @@
-
 use eyre::Result;
 
 pub async fn atualizar_oraculo(
@@ -28,7 +27,7 @@ pub async fn atualizar_oraculo(
         match ethers::providers::Middleware::send_transaction(&signer_http, tx, None).await {
             Ok(tx) => tx,
             Err(e) => {
-                println!("error: {:?}", e);
+                println!("error: {e:?}");
                 std::process::exit(1);
             }
         };
@@ -36,7 +35,7 @@ pub async fn atualizar_oraculo(
     let _receipt = match pending_tx.await {
         Ok(receipt) => receipt,
         Err(e) => {
-            println!("error: {:?}", e);
+            println!("error: {e:?}");
             std::process::exit(1);
         }
     };
