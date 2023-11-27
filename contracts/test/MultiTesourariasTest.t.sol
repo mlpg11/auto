@@ -45,7 +45,7 @@ contract MultiTesourariasTest is Test {
         _drex.approve(address(_multiTesourarias), 100e18);
 
         _multiTesourarias.depositar(0, 100e18);
-        
+
         (uint256 a,,,,) = _multiTesourarias.depositos(0);
 
         console.log("Teste; %s", a);
