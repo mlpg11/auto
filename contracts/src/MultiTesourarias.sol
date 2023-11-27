@@ -4,71 +4,106 @@ pragma solidity ^0.8.21;
 import {ERC721} from "solmate/src/tokens/ERC721.sol";
 import {ERC20} from "solmate/src/mixins/ERC4626.sol";
 import {DrexMock} from "./DrexMock.sol";
+import {Owned} from "solmate/src/auth/Owned.sol";
 
-contract MultiTesourarias is ERC721 {
-    constructor(address _drexContract) ERC721("MultiTesourarias", "MTS") {
-        _drex = ERC20(_drexContract);
+contract MultiTesourarias is ERC721, Owned {
+    /*//////////////////////////////////////////////////////////////
+                                STORAGE
+    //////////////////////////////////////////////////////////////*/
+
+    uint256 private currentId;
+
+    mapping(uint256 => Deposito) public depositos;
+
+    /// @notice Quantidade de anos => Multiplicador
+    mapping(uint256 => uint256) public multiplicador;
+
+    uint256 internal _fundos;
+    uint256 internal _participacoes;
+
+    DrexMock private immutable _drex;
+
+    /// @notice 1 ponto = 1e12 = 100%
+    uint256 private constant _PONTOS_BASE = 1e12;
+
+    /*//////////////////////////////////////////////////////////////
+                                CONSTRUCTOR
+    //////////////////////////////////////////////////////////////*/
+
+    constructor(address _drexContract) ERC721("MultiTesourarias", "MTS") Owned(msg.sender) {
+        _drex = DrexMock(_drexContract);
+
+        multiplicador[0] = 0;
     }
 
     struct Deposito {
         uint256 shares;
-        Tesourarias tesouraria;
         /// @notice Aponta a partir de qual data o depósito terá liquidez (em UNIX timestamp)
         uint256 liquidoApos;
+        uint256 momentoDeposito;
         string uri;
+        uint256 multiplicador;
     }
 
-    function depositar(Tesourarias tesouraria, uint256 amount) public returns (uint256 shares) {
+    function depositar(uint256 duracao, uint256 amount) public returns (uint256 shares) {
         require(amount > 0, "MultiTesourarias: Deposito minimo de 1 DREX");
 
-        shares = convertToShares(tesouraria, amount);
+        if (duracao != 0 && duracao % 365 != 0) {
+            revert("MultiTesourarias: Duracao invalida");
+        }
+
+        shares = convertToShares(amount);
 
         _drex.transferFrom(msg.sender, address(this), amount);
 
         require(shares > 0, "MultiTesourarias: Nao ha participacoes disponiveis");
 
-        _fundos[tesouraria] += amount;
-        _participacoes[tesouraria] += shares;
+        _fundos += amount;
+        _participacoes += shares;
 
-        _depositos[currentToken] = Deposito(shares, tesouraria, block.timestamp, "");
+        uint256 multiplicador_ = multiplicador[duracao];
 
-        _mint(msg.sender, shares);
+        depositos[currentId] = Deposito(shares, block.timestamp + duracao, block.timestamp, "", multiplicador_);
+
+        _mint(msg.sender, currentId);
+
+        currentId++;
     }
 
-    function retirar(Tesourarias tesouraria, uint256 shares) public returns (uint256 amount) {
-        require(shares > 0, "MultiTesourarias: Nao ha participacoes disponiveis");
+    function retirar(uint256 idDeposito) public returns (uint256 amount) {
+        Deposito memory deposito = depositos[idDeposito];
 
-        amount = convertToAssets(tesouraria, shares);
+        require(deposito.shares > 0, "MultiTesourarias: Nao ha participacoes disponiveis");
 
-        queimar(shares);
+        amount = convertToAssets(deposito.shares);
+
+        if (deposito.liquidoApos != deposito.momentoDeposito) {
+            uint256 multiplicador_ = deposito.multiplicador;
+
+            uint256 novaQuantia = (amount * multiplicador_) / _PONTOS_BASE;
+
+            _drex.mintarBonus(novaQuantia - amount);
+
+            amount = novaQuantia;
+        }
+
+        _burn(idDeposito);
 
         _drex.transfer(msg.sender, amount);
     }
 
-    function depositarRendimento(Tesourarias tesouraria, uint256 quantidadeDrex) external {
+    function depositarRendimento(uint256 quantidadeDrex) external {
         _drex.transferFrom(msg.sender, address(this), quantidadeDrex);
 
-        _fundos[tesouraria] += quantidadeDrex;
+        _fundos += quantidadeDrex;
     }
 
-    /*//////////////////////////////////////////////////////////////
-                                STORAGE
-    //////////////////////////////////////////////////////////////*/
+    function ajustarMultiplicadores(uint256[] memory duracoes, uint256[] memory multiplicadores) external {
+        require(duracoes.length == multiplicadores.length, "MultiTesourarias: Arrays de tamanhos diferentes");
 
-    uint256 private currentToken;
-
-    mapping(uint256 => Deposito) private _depositos;
-
-    mapping(Tesourarias => uint256) private _fundos;
-    mapping(Tesourarias => uint256) private _participacoes;
-    mapping(Tesourarias => uint256) private _duracao;
-
-    ERC20 private immutable _drex;
-
-    enum Tesourarias {
-        Liquidez_Imediata,
-        Liquidez_2024,
-        Liquidez_2025
+        for (uint256 i = 0; i < duracoes.length; i++) {
+            multiplicador[duracoes[i]] = multiplicadores[i];
+        }
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -77,23 +112,19 @@ contract MultiTesourarias is ERC721 {
 
     function tokenURI(uint256 id) public view override returns (string memory) {}
 
-    function totalAssets(Tesourarias tesouraria) public view returns (uint256) {
-        return _fundos[tesouraria];
+    function totalAssets() public view returns (uint256) {
+        return _fundos;
     }
 
-    function totalSupply(Tesourarias tesouraria) public view returns (uint256) {
-        return _participacoes[tesouraria];
+    function totalSupply() public view returns (uint256) {
+        return _participacoes;
     }
 
-    function convertToShares(Tesourarias tesouraria, uint256 amount) public view returns (uint256 shares) {
-        shares = (amount * _participacoes[tesouraria]) / _fundos[tesouraria];
+    function convertToShares(uint256 amount) public view returns (uint256 shares) {
+        shares = (amount * _participacoes) / _fundos;
     }
 
-    function convertToAssets(Tesourarias tesouraria, uint256 shares) public view returns (uint256 amount) {
-        amount = (shares * _fundos[tesouraria]) / _participacoes[tesouraria];
-    }
-
-    function queimar(uint256 amount) internal {
-        _drex.transfer(address(0), amount);
+    function convertToAssets(uint256 shares) public view returns (uint256 amount) {
+        amount = (shares * _fundos) / _participacoes;
     }
 }
