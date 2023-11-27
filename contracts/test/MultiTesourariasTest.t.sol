@@ -30,7 +30,7 @@ contract MultiTesourariasTest is Test {
         multiplicadores[0] = 2e12;
         multiplicadores[1] = 3e12;
         multiplicadores[2] = 4e12;
-        
+
         _multiTesourarias.ajustarMultiplicadores(duracoes, multiplicadores);
 
         vm.stopPrank();
