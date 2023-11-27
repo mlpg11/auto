@@ -1,4 +1,4 @@
-use dotenv::dotenv;
+
 use eyre::Result;
 
 pub async fn atualizar_oraculo(
@@ -33,7 +33,7 @@ pub async fn atualizar_oraculo(
             }
         };
 
-    let receipt = match pending_tx.await {
+    let _receipt = match pending_tx.await {
         Ok(receipt) => receipt,
         Err(e) => {
             println!("error: {:?}", e);
