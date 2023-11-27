@@ -1,0 +1,49 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+  }
+  
+  .logo {
+    height: 50px;
+    width: auto;
+  }
+  
+  ul {
+    list-style: none;
+    display: flex;
+  }
+  
+  li {
+    padding: 0 10px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black; /* Cor padrão dos links */
+    font-weight: bold;
+  }
+  
+  a.active {
+    text-decoration: underline; /* Sublinha o link ativo */
+  }
+  
+  .wallet-button {
+    padding: 10px 20px;
+    background-color: #0000FF; /* Cor do botão */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .wallet-button:hover {
+    background-color: #0000CC; /* Cor do botão ao passar o mouse */
+  }  
+
+  .active {
+    font-weight: bold;
+    text-decoration: underline;
+  }
