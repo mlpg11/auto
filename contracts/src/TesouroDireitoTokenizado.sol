@@ -184,4 +184,144 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
 
         return supply == 0 ? shares : (shares * totalAssets()) / supply;
     }
+
+    function svgTokenURI(uint256 tokenId) public view returns (string memory) {
+        Deposito memory deposito = depositos[tokenId];
+
+        string memory svg = generateSVG(deposito);
+        string memory imageURI = svgToImageURI(svg);
+        string memory json = Base64.encode(
+            bytes(
+                string(
+                    abi.encodePacked(
+                        '{"name": "Deposito #',
+                        toString(tokenId),
+                        '", "description": "Informacoes do Deposito",',
+                        '"image": "',
+                        imageURI,
+                        '"}'
+                    )
+                )
+            )
+        );
+
+        return string(abi.encodePacked("data:application/json;base64,", json));
+    }
+
+    function generateSVG(Deposito memory deposito) internal pure returns (string memory) {
+        string memory svg = string(
+            abi.encodePacked(
+                '<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">',
+                '<rect width="100%" height="100%" fill="white" />',
+                '<text x="10" y="20" class="base">',
+                "Shares: ",
+                toString(deposito.shares),
+                "</text>",
+                '<text x="10" y="40" class="base">',
+                "Liquido Apos: ",
+                toString(deposito.liquidoApos),
+                "</text>",
+                '<text x="10" y="60" class="base">',
+                "Momento Deposito: ",
+                toString(deposito.momentoDeposito),
+                "</text>",
+                '<text x="10" y="80" class="base">',
+                "Multiplicador: ",
+                toString(deposito.multiplicador),
+                "</text>",
+                "</svg>"
+            )
+        );
+
+        return svg;
+    }
+
+    function svgToImageURI(string memory svg) internal pure returns (string memory) {
+        string memory baseURL = "data:image/svg+xml;base64,";
+        string memory svgBase64Encoded = Base64.encode(bytes(string(abi.encodePacked(svg))));
+        return string(abi.encodePacked(baseURL, svgBase64Encoded));
+    }
+
+    function toString(uint256 value) internal pure returns (string memory) {
+        // Base case: 0
+        if (value == 0) {
+            return "0";
+        }
+        // Temporarily store the value for length calculation
+        uint256 temp = value;
+        uint256 digits;
+        while (temp != 0) {
+            digits++;
+            temp /= 10;
+        }
+        // Allocate enough memory to store the string
+        bytes memory buffer = new bytes(digits);
+        while (value != 0) {
+            digits -= 1;
+            buffer[digits] = bytes1(uint8(48 + uint256(value % 10)));
+            value /= 10;
+        }
+        return string(buffer);
+    }
+}
+
+library Base64 {
+    bytes internal constant TABLE = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+    /// @dev Encodes some bytes to the base64 representation
+    function encode(bytes memory data) internal pure returns (string memory) {
+        if (data.length == 0) return "";
+
+        // Load the table into memory
+        string memory table = string(TABLE);
+
+        // Calculate the number of base64 encoded bytes
+        uint256 encodedLen = 4 * ((data.length + 2) / 3);
+
+        // Allocate memory for the output
+        string memory result = new string(encodedLen + 32);
+
+        assembly {
+            // Set the actual output length
+            mstore(result, encodedLen)
+
+            // Prepare the lookup table
+            let tablePtr := add(table, 1)
+
+            // Input ptr
+            let dataPtr := data
+            let endPtr := add(dataPtr, mload(data))
+
+            // Output ptr, start at 32 bytes to skip the length
+            let resultPtr := add(result, 32)
+
+            // Loop through input, 3 bytes at a time
+            for {} lt(dataPtr, endPtr) {} {
+                dataPtr := add(dataPtr, 3)
+
+                // Read input chunk (3 bytes)
+                let input := mload(dataPtr)
+
+                // Write four characters to output
+                mstore8(resultPtr, mload(add(tablePtr, and(shr(18, input), 0x3F))))
+                resultPtr := add(resultPtr, 1)
+
+                mstore8(resultPtr, mload(add(tablePtr, and(shr(12, input), 0x3F))))
+                resultPtr := add(resultPtr, 1)
+
+                mstore8(resultPtr, mload(add(tablePtr, and(shr(6, input), 0x3F))))
+                resultPtr := add(resultPtr, 1)
+
+                mstore8(resultPtr, mload(add(tablePtr, and(input, 0x3F))))
+                resultPtr := add(resultPtr, 1)
+            }
+
+            // Pad with '='
+            switch mod(mload(data), 3)
+            case 1 { mstore(sub(resultPtr, 2), shl(240, 0x3d3d)) }
+            case 2 { mstore8(sub(resultPtr, 1), 0x3d) }
+        }
+
+        return result;
+    }
 }

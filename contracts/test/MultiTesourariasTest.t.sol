@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.21;
 
+import "forge-std/console.sol";
 import "forge-std/Test.sol";
 import {TesouroDireitoTokenizado} from "src/TesouroDireitoTokenizado.sol";
 import {DrexMock} from "src/DrexMock.sol";
@@ -44,6 +45,12 @@ contract MultiTesourariasTest is Test {
         _drex.approve(address(_multiTesourarias), 100e18);
 
         _multiTesourarias.depositar(0, 100e18);
+        
+        (uint256 a,,,,) = _multiTesourarias.depositos(0);
+
+        console.log("Teste; %s", a);
+
+        console.log("URI: %s", _multiTesourarias.tokenURI(0));
 
         assertEq(_multiTesourarias.totalAssets(), 100e18);
         assertEq(_multiTesourarias.totalSupply(), 100e18);
