@@ -50,15 +50,9 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
         uint256 multiplicador; // Multiplicador para o depósito
         uint8 risco;
     }
-
     /*//////////////////////////////////////////////////////////////
                                FUNCIONALIDADES
     //////////////////////////////////////////////////////////////*/
-
-    // Define o contrato Drex
-    function setarDrex(DrexMock drex) external onlyOwner {
-        _drex = drex;
-    }
 
     /**
      * @notice Função para depositar DREX e comprar um titulo
@@ -162,6 +156,11 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
         for (uint256 i = 0; i < duracoes.length; i++) {
             multiplicador[duracoes[i]] = multiplicadores[i];
         }
+    }
+
+    /// @dev Define o contrato Drex, apenas pode ser chamada por entidades autorizadas
+    function setarDrex(DrexMock drex) external onlyOwner {
+        _drex = drex;
     }
 
     /*//////////////////////////////////////////////////////////////
