@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.css';
 
-function Card({ titulo, tipo, rentabilidade, vencimento, investimento_minimo, risco }) {
+function Card({ id, titulo, tipo, rentabilidade, vencimento, investimento_minimo, risco }) {
     
     const getTipoClass = (tipo) => {
         const typeColorMap = {
@@ -17,7 +17,6 @@ function Card({ titulo, tipo, rentabilidade, vencimento, investimento_minimo, ri
     return (
         <div className="card">
             <div className={`card-header ${getTipoClass(tipo)}`}>{titulo}</div>
-            <div className="linha"></div>
             <div className="card-body">
                 <div className="data-container" id="rentabilidade">
                     <p className="label">RENTABILIDADE</p> 
@@ -36,7 +35,7 @@ function Card({ titulo, tipo, rentabilidade, vencimento, investimento_minimo, ri
                     <p className="data">{risco}</p>
                 </div>
             </div>
-            <div className="linha"></div>
+            
             <div className="card-footer">
                 <div id="fileira1">
                     <button className="fileira1-button">Detalhes</button>
