@@ -1,0 +1,36 @@
+.sort-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: #f5f5f5; /* Escolha uma cor de fundo adequada */
+}
+
+.texto {
+    margin-right: 30px;
+}
+
+.asc {
+    color: #2263da;
+}
+
+.desc {
+    color:#c74949;
+}
+
+.spacer {
+    width: 10px;
+}
+
+.sort-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.05em;
+    margin-right: 1%;
+}
+
+.sort-bar button:focus {
+    outline: none;
+}

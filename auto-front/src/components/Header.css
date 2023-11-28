@@ -3,12 +3,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #f0f0f0;
+    background-color: #f1f4ff;
   }
   
   .logo {
     height: 50px;
     width: auto;
+    margin-left: 30px;
   }
   
   ul {
@@ -23,11 +24,11 @@
   a {
     text-decoration: none;
     color: black; /* Cor padrão dos links */
-    font-weight: bold;
   }
   
   a.active {
     text-decoration: underline; /* Sublinha o link ativo */
+    font-weight: 500;
   }
   
   .wallet-button {
@@ -37,6 +38,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 30px;
   }
   
   .wallet-button:hover {
