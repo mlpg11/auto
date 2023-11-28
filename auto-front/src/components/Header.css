@@ -1,51 +1,52 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f1f4ff;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f1f4ff;
+}
   
-  .logo {
-    height: 50px;
-    width: auto;
-    margin-left: 30px;
-  }
+.logo {
+  height: 50px;
+  width: auto;
+  margin-left: 30px;
+}
   
-  ul {
-    list-style: none;
-    display: flex;
-  }
+ul {
+  list-style: none;
+  display: flex;
+}
   
-  li {
-    padding: 0 10px;
-  }
-  
-  a {
-    text-decoration: none;
-    color: black; /* Cor padrão dos links */
-  }
-  
-  a.active {
-    text-decoration: underline; /* Sublinha o link ativo */
-    font-weight: 500;
-  }
-  
-  .wallet-button {
-    padding: 10px 20px;
-    background-color: #0000FF; /* Cor do botão */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 30px;
-  }
-  
-  .wallet-button:hover {
-    background-color: #0000CC; /* Cor do botão ao passar o mouse */
-  }  
+li {
+  padding: 0 10px;
+  font-size: 17px;
+}
 
-  .active {
-    font-weight: bold;
-    text-decoration: underline;
-  }
+a {
+  text-decoration: none;
+  color: black; /* Cor padrão dos links */
+}
+
+a.active {
+  text-decoration: underline; /* Sublinha o link ativo */
+  font-weight: 500;
+}
+
+.wallet-button {
+  padding: 10px 20px;
+  background-color: #1919ff; /* Cor do botão */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 30px;
+}
+
+.wallet-button:hover {
+  background-color: #000086; /* Cor do botão ao passar o mouse */
+}  
+
+.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
