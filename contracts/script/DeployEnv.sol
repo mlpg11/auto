@@ -27,6 +27,8 @@ contract DeployEnv is Script {
         cdi = new CdiOraculo(DEPLOYER);
         taxaDeJuros = new TaxaDeJurosOraculo(DEPLOYER);
 
+        tesouro.setarDrex(drex);
+
         console.log("Tesouro Direto Tokenizado: ", address(tesouro));
         console.log("DREX: ", address(drex));
         console.log("IPCA: ", address(ipca));
