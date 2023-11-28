@@ -50,6 +50,7 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
         uint256 multiplicador; // Multiplicador para o depósito
         uint8 risco;
     }
+    
     /*//////////////////////////////////////////////////////////////
                                FUNCIONALIDADES
     //////////////////////////////////////////////////////////////*/
