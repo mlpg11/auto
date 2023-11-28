@@ -1,6 +1,7 @@
 import React from 'react';
 import './Header.css';
 import logoImage from '../assets/logo.png';
+import iconImage from '../assets/icon.png';
 import { NavLink } from 'react-router-dom';
 import { useSDK } from '@metamask/sdk-react';
 
@@ -23,20 +24,21 @@ function Header() {
   return (
     <header className="header">
       {/* Logo */}
-      <img src={logoImage} alt="Logo" className="logo" />
-      
+      <img src={logoImage} alt="Logo" className="logo desktop" />
+      <img src={iconImage} alt="Icon" className="logo mobile" />
+
       {/* Navegação */}
       <nav>
-        <ul>
+        <ul className="nav-links">
           <li>
-            <NavLink to="/explorar" activeClassName="active">Explorar</NavLink>
+            <NavLink to="/explorar" className="nav-link" activeClassName="active">Explorar</NavLink>
           </li>
           <li>
-            <NavLink to="/meus-tokens" activeClassName="active">Meus tokens</NavLink>
+            <NavLink to="/meus-tokens" className="nav-link" activeClassName="active">Meus tokens</NavLink>
           </li>
         </ul>
       </nav>
-      
+
       {/* Botão de Conectar Carteira */}
       <button onClick={connectWalletHandler} className="wallet-button">
         {connected ? 'Conectado' : 'Conectar Carteira'}
