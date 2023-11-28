@@ -35,8 +35,8 @@ function Explorar() {
     return (
         <div>
             <Header></Header>
-            <FilterBar onFilterChange={handleFilterChange} />
             <SortBar onSortChange={handleSortChange} />
+            <FilterBar onFilterChange={handleFilterChange} />
         </div>
     );
 }
