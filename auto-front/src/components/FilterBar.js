@@ -39,7 +39,7 @@ function FilterBar({ onFilterChange }) {
                     checked={filters.tesouroSelic}
                     onChange={handleCheckboxChange}
                 />
-                Tesouro Selic
+                Selic
             </label>
             <label id="tesouroPrefixado">
                 <input
@@ -48,7 +48,7 @@ function FilterBar({ onFilterChange }) {
                     checked={filters.tesouroPrefixado}
                     onChange={handleCheckboxChange}
                 />
-                Tesouro Prefixado
+                Prefixado
             </label>
             <label id="tesouroIPCA">
                 <input
@@ -57,7 +57,7 @@ function FilterBar({ onFilterChange }) {
                     checked={filters.tesouroIPCA}
                     onChange={handleCheckboxChange}
                 />
-                Tesouro IPCA+
+                IPCA+
             </label>
             <label id="tesouroRenda">
                 <input
@@ -66,7 +66,7 @@ function FilterBar({ onFilterChange }) {
                     checked={filters.tesouroRenda}
                     onChange={handleCheckboxChange}
                 />
-                Tesouro Renda+
+                Renda+
             </label>
             <label id="outros">
                 <input

@@ -1,5 +1,7 @@
 .filter-bar {
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
     justify-content: center;
     align-items: center;
     background: #ffffff; /* Cor de fundo da barra */
@@ -19,23 +21,23 @@
 }
 
 #tesouroSelic {
-    color: #ff7809;
+    color: #139F7B;;
 }
 
 #tesouroPrefixado {
-    color: #1f4cff;
+    color: #0FA291;
 }
 
 #tesouroIPCA {
-    color: #ff4040;
+    color: #0986AA;
 }
 
 #tesouroRenda {
-    color: #08940b;
+    color: #144D88;
 }
 
 #outros {
-    color: #5a0298;
+    color: #122d5f;
 }
 
 /* Contêiner para o campo de busca e botão */
