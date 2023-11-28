@@ -1,0 +1,115 @@
+.card {
+    border: 1px solid #000;
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+    margin: 10px;
+    overflow: hidden;
+    width: 30%;
+    max-width: 230px;
+}
+
+.card-header {
+    background-color: white;
+    color: white;
+    font-weight: 400;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.linha {
+    background-color: black;
+    color: black;
+    height: 1px;
+    width: 100%;
+}
+
+.card-body {
+    padding-top: 10px;
+    padding-bottom: 2px;
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.label {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    font-size: small;
+}
+
+.data {
+    display: flex;
+    justify-content: center;
+    margin-top: 2px;
+    font-weight: 600;
+    font-size: large;
+    margin-bottom: 8px;
+
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+#fileira1 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    margin-top: 6px;
+}
+
+#spacer1 {
+    width: 0px;
+}
+
+.fileira1-button {
+    border: none;
+    background-color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.fileira1-button:hover {
+    font-weight: bold;
+}
+
+.comprar-button {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: white;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.comprar-button:hover {
+    background-color: calc(background-color - #111111);
+}
+
+.selic { background-color: #ff7809; }
+.prefixado { background-color: #1f4cff; }
+.ipca { background-color: #ff4040; }
+.renda { background-color: #08940b; }
+.outros { background-color: #5a0298; }
+
+.comprar-button.selic:hover { background-color: #a65100; } 
+.comprar-button.prefixado:hover { background-color: #1229ac; } 
+.comprar-button.ipca:hover { background-color: #901d1d; } 
+.comprar-button.renda:hover { background-color: #044a04; } 
+.comprar-button.outros:hover { background-color: #27024f; } 
