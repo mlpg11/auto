@@ -19,18 +19,26 @@ pub async fn atualizar_oraculo(
         .await?,
     )?;
 
-    let instance = crate::contracts::BaseOraculo::new(endereco_oraculo, signer_http.clone());
+    let instance = crate::contracts::BaseOraculo::new(
+        endereco_oraculo,
+        signer_http.clone(),
+    );
 
     let tx = instance.setar_valor(novo_valor).tx;
 
-    let pending_tx =
-        match ethers::providers::Middleware::send_transaction(&signer_http, tx, None).await {
-            Ok(tx) => tx,
-            Err(e) => {
-                println!("error: {e:?}");
-                std::process::exit(1);
-            }
-        };
+    let pending_tx = match ethers::providers::Middleware::send_transaction(
+        &signer_http,
+        tx,
+        None,
+    )
+    .await
+    {
+        Ok(tx) => tx,
+        Err(e) => {
+            println!("error: {e:?}");
+            std::process::exit(1);
+        }
+    };
 
     let _receipt = match pending_tx.await {
         Ok(receipt) => receipt,

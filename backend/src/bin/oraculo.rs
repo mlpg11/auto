@@ -1,13 +1,12 @@
-use backend::tasks::atualizar_oraculo;
-use backend::types::EntradaOraculos;
+use backend::{tasks::atualizar_oraculo, types::EntradaOraculos};
 
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
     let mut oraculos_novos_valores: EntradaOraculos = todo!();
 
     // for (oraculo, novos_valores) in oraculos_novos_valores {
-    //     match atualizar_oraculo::atualizar_oraculo(oraculo, novos_valores).await {
-    //         Ok(()) => {
+    //     match atualizar_oraculo::atualizar_oraculo(oraculo,
+    // novos_valores).await {         Ok(()) => {
     //             println!("Oraculo {} atualizado com sucesso!", &oraculo);
     //         },
     //         Err(e) => {

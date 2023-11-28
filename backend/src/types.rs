@@ -10,8 +10,8 @@ pub struct EntradaOraculos {
 }
 
 impl IntoIterator for EntradaOraculos {
-    type Item = (ethers::types::Address, ethers::types::U256);
     type IntoIter = std::vec::IntoIter<Self::Item>;
+    type Item = (ethers::types::Address, ethers::types::U256);
 
     fn into_iter(self) -> Self::IntoIter {
         self.items.into_iter()
