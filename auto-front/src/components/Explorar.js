@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import FilterBar from './FilterBar';
 import SortBar from './SortBar';
 import Header from './Header';
+import ListaCards from './ListaCards';
 
 function Explorar() {
     // filter bar
@@ -37,6 +38,7 @@ function Explorar() {
             <Header></Header>
             <SortBar onSortChange={handleSortChange} />
             <FilterBar onFilterChange={handleFilterChange} />
+            <ListaCards/>
         </div>
     );
 }
