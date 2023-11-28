@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #FFFFFF; /* Cor de fundo da barra */
+    background: #fdfdfd; /* Cor de fundo da barra */
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave para a barra */
 }
@@ -10,10 +10,31 @@
 .filter-bar label {
     margin-right: 10px;
     cursor: pointer;
+    font-weight: 500;
 }
 
 .filter-bar input[type="checkbox"] {
     margin-right: 5px;
+}
+
+#tesouroSelic {
+    color: #ff7809;
+}
+
+#tesouroPrefixado {
+    color: #1f4cff;
+}
+
+#tesouroIPCA {
+    color: #ff4040;
+}
+
+#tesouroRenda {
+    color: #08940b;
+}
+
+#outros {
+    color: #5a0298;
 }
 
 /* Contêiner para o campo de busca e botão */

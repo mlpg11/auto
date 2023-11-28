@@ -32,7 +32,7 @@ function FilterBar({ onFilterChange }) {
     return (
         <div className="filter-bar">
             {/* Checkboxes para filtros */}
-            <label>
+            <label id="tesouroSelic">
                 <input
                     type="checkbox"
                     name="tesouroSelic"
@@ -41,7 +41,7 @@ function FilterBar({ onFilterChange }) {
                 />
                 Tesouro Selic
             </label>
-            <label>
+            <label id="tesouroPrefixado">
                 <input
                     type="checkbox"
                     name="tesouroPrefixado"
@@ -50,7 +50,7 @@ function FilterBar({ onFilterChange }) {
                 />
                 Tesouro Prefixado
             </label>
-            <label>
+            <label id="tesouroIPCA">
                 <input
                     type="checkbox"
                     name="tesouroIPCA"
@@ -59,7 +59,7 @@ function FilterBar({ onFilterChange }) {
                 />
                 Tesouro IPCA+
             </label>
-            <label>
+            <label id="tesouroRenda">
                 <input
                     type="checkbox"
                     name="tesouroRenda"
@@ -68,7 +68,7 @@ function FilterBar({ onFilterChange }) {
                 />
                 Tesouro Renda+
             </label>
-            <label>
+            <label id="outros">
                 <input
                     type="checkbox"
                     name="outros"
