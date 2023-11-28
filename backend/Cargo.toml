@@ -5,6 +5,10 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[[bin]]
+name = "oraculo"
+path = "src/bin/oraculo.rs"
+
 [dependencies]
 dotenv = "0.15.0"
 ethers = "2.0.11"

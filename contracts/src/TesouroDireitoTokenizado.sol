@@ -13,23 +13,23 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
                                VARIÁVEIS DE ARMAZENAMENTO
     //////////////////////////////////////////////////////////////*/
 
-    // Contador para rastrear o ID atual do token
+    /// @notice Contador para rastrear o ID atual do token
     uint256 public currentId;
 
-    // Mapeamento do ID do token para a estrutura Deposito para armazenar detalhes do depósito
+    /// @notice Mapeamento do ID do token para a estrutura Deposito para armazenar detalhes do depósito
     mapping(uint256 => Deposito) public depositos;
 
-    // Mapeamento para armazenar a relação duração-multiplicador
+    /// @notice Mapeamento para armazenar a relação duração-multiplicador
     mapping(uint256 => uint256) public multiplicador;
 
-    // Variáveis internas para rastrear fundos e participações
+    /// @dev Variáveis internas para rastrear fundos e participações
     uint256 internal _fundos;
     uint256 internal _participacoes;
 
-    // Referência ao contrato DrexMock
+    /// @dev Referência ao contrato DrexMock
     DrexMock private _drex;
 
-    // Constante para cálculo de pontos base
+    /// @dev Constante para cálculo de pontos base
     uint256 private constant _PONTOS_BASE = 1e12;
 
     /*//////////////////////////////////////////////////////////////
@@ -48,6 +48,7 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
         uint256 momentoDeposito; // Timestamp do depósito
         string uri;
         uint256 multiplicador; // Multiplicador para o depósito
+        uint8 risco;
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -59,8 +60,13 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
         _drex = drex;
     }
 
-    // Função para depositar fundos
-    function depositar(uint256 duracao, uint256 amount) public returns (uint256 shares) {
+    /**
+     * @notice Função para depositar DREX e comprar um titulo
+     * @param duracao Depositar com duracao maior do que 0 significa comprar um titulo pre-fixado, que tera seu valor corrigido por um multiplicador na hora do saque
+     * @param amount Quantidade de DREX a ser depositada
+     * @param risco 0 = baixo, 1 = medio, 2 = alto
+     */
+    function depositar(uint256 duracao, uint256 amount, uint8 risco) public returns (uint256 shares) {
         // Verificações de validação
         require(amount > 0, "MultiTesourarias: Deposito minimo de 1 DREX");
         if (duracao != 0 && duracao % 365 days != 0) {
@@ -83,7 +89,7 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
         uint256 multiplicador_ = multiplicador[duracao];
 
         // Cria e armazena o depósito
-        depositos[currentId] = Deposito(shares, block.timestamp + duracao, block.timestamp, "", multiplicador_);
+        depositos[currentId] = Deposito(shares, block.timestamp + duracao, block.timestamp, "", multiplicador_, risco);
 
         // Cunha um novo NFT para o depósito
         _mint(msg.sender, currentId);
@@ -92,7 +98,11 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
         currentId++;
     }
 
-    // Função para retirar fundos
+    /**
+     * @notice Funcao para retirar DREX de um deposito, queimando o seu token (NFT)
+     * @param idDeposito Id da NFT do deposito
+     * @return amount Quantidade de DREX retirada
+     */
     function retirar(uint256 idDeposito) public returns (uint256 amount) {
         // Verifica se o chamador é o dono do depósito
         require(ownerOf(idDeposito) == msg.sender, "MultiTesourarias: Apenas o dono do deposito pode retirar");
@@ -130,7 +140,10 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
         _drex.transfer(msg.sender, amount);
     }
 
-    // Função para adicionar rendimentos ao contrato
+    /**
+     * @notice Aumenta o valor do
+     * @param quantidadeDrex Quantidade de DREX a ser depositada
+     */
     function depositarRendimento(uint256 quantidadeDrex) external {
         _drex.transferFrom(msg.sender, address(this), quantidadeDrex);
 
@@ -138,7 +151,11 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
         _fundos += quantidadeDrex;
     }
 
-    // Função para ajustar os multiplicadores para diferentes durações
+    /**
+     * @notice Funcao para atualizar o multiplicador de um deposito pre-fixado
+     * @param duracoes Duracao em UNIX
+     * @param multiplicadores Multiplicador correspondente a duracao
+     */
     function ajustarMultiplicadores(uint256[] memory duracoes, uint256[] memory multiplicadores) external onlyOwner {
         require(duracoes.length == multiplicadores.length, "MultiTesourarias: Arrays de tamanhos diferentes");
 
@@ -151,34 +168,50 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
                                 VIEWS
     //////////////////////////////////////////////////////////////*/
 
-    // Função para retornar a URI do token
+    /**
+     * @notice Url dos metadados do token
+     * @param id Id do deposito
+     */
     function tokenURI(uint256 id) public view override returns (string memory) {
         // Implementação específica para retornar a URI do token
     }
 
-    // Função para visualizar o total de ativos
+    /**
+     * @notice Quantidade total de DREX depositado, utilizado no nosso sistema similar ao padrao ERC-4626
+     */
     function totalAssets() public view returns (uint256) {
         return _fundos;
     }
 
-    // Função para visualizar o fornecimento total
+    /**
+     * @notice Quantidade total de participacoes, utilizado no nosso sistema similar ao padrao ERC-4626
+     */
     function totalSupply() public view returns (uint256) {
         return _participacoes;
     }
 
-    // Função para pré-visualizar o depósito em termos de participações
+    /**
+     * @notice Funcao para prever a quantidade de participacoes que serao criadas com um deposito
+     * @param assets Quantidade de DREX a ser depositada
+     */
     function previewDeposit(uint256 assets) public view virtual returns (uint256) {
         return convertToShares(assets);
     }
 
-    // Função para converter ativos em participações
+    /**
+     * @notice Funcao para prever a quantidade de participacoes que serao criadas com um deposito
+     * @param assets Quantidade de DREX a ser depositada
+     */
     function convertToShares(uint256 assets) public view virtual returns (uint256) {
         uint256 supply = _participacoes; // Economiza um SLOAD extra se totalSupply for não nulo
 
         return supply == 0 ? assets : (assets * supply) / totalAssets();
     }
 
-    // Função para converter participações em ativos
+    /**
+     * @notice Funcao para prever a quantidade de DREX que serao criadas com um deposito
+     * @param shares Quantidade de participacoes a serem convertidas
+     */
     function convertToAssets(uint256 shares) public view returns (uint256) {
         uint256 supply = _participacoes; // Economiza um SLOAD extra se totalSupply for não nulo
 

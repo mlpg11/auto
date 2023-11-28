@@ -4,7 +4,6 @@ pub type AutoSigner = std::sync::Arc<
         ethers::signers::LocalWallet,
     >,
 >;
-
 pub struct EntradaOraculos {
     items: Vec<(ethers::types::Address, ethers::types::U256)>,
 }
