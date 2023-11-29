@@ -1,5 +1,4 @@
 const getCards = async () => {
-    
     const cards = [
         {
             id: '0',
@@ -77,9 +76,15 @@ const getCards = async () => {
     return cards;
 };
 
+/*
+    cards {int id, string titulo, int tipo, string rentabilidade, string vencimento, string investimento_minimo, string risco}
+    filters {bool tesouroSelic, bool tesouroPrefixado, bool tesouroIPCA, bool tesouroRenda, bool outros, string searchTerm}
+
+    vc pode usar console.log(cards ou filters) pra testar
+*/
 const applyFilters = (cards, filters) => {
     // Implemente a lógica de filtragem aqui
-    
+    console.log(cards);
     return cards;
 };
 

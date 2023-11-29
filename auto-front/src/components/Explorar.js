@@ -10,8 +10,10 @@ function Explorar() {
 
     // filter bar
     const [filters, setFilters] = useState({
-        sortOrder: 'titulo',
-        tesouroDireto: true,
+        tesouroSelic: true,
+        tesouroPrefixado: true,
+        tesouroIPCA: true,
+        tesouroRenda: true,
         outros: false,
         searchTerm: ''
     });

@@ -5,11 +5,11 @@ import './FilterBar.css';
 
 function FilterBar({ onFilterChange }) {
     const [filters, setFilters] = useState({
-        tesouroSelic: false,
-        tesouroPrefixado: false,
-        tesouroIPCA: false,
-        tesouroRenda: false,
-        outros: false,
+        tesouroSelic: true,
+        tesouroPrefixado: true,
+        tesouroIPCA: true,
+        tesouroRenda: true,
+        outros: true,
     });
     const [searchTerm, setSearchTerm] = useState('');
 
