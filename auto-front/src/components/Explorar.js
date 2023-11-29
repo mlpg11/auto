@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterBar from './FilterBar';
 import SortBar from './SortBar';
 import Header from './Header';
 import ListaCards from './ListaCards';
+import SelecionaCards, { selectCards } from './SelecionaCards';
 
 function Explorar() {
+    const [currentCards, setCurrentCards] = useState([]);
+
     // filter bar
     const [filters, setFilters] = useState({
         sortOrder: 'titulo',
@@ -33,12 +36,18 @@ function Explorar() {
         // Atualize os dados exibidos com base na nova ordenação
     };
 
+    useEffect(() => {
+        selectCards(filters, sorting).then(selectedCards => {
+            setCurrentCards(selectedCards);
+        });
+    }, [filters, sorting]);
+
     return (
         <div>
             <Header></Header>
             <SortBar onSortChange={handleSortChange} />
             <FilterBar onFilterChange={handleFilterChange} />
-            <ListaCards/>
+            <ListaCards cards={currentCards}/>
         </div>
     );
 }
