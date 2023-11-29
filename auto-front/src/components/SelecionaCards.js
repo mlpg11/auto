@@ -88,11 +88,18 @@ const applyFilters = (cards, filters) => {
     return cards;
 };
 
+/*
+    sorting ou é 'asc' ou ' ' ou 'desc' asc pra crescente e desc pra decrescente
+    sorting {titulo, rentabilidade, vencimento, minimo, risco}
+*/ 
+
+
 const applySorting = (cards, sorting) => {
     // Implemente a lógica de ordenação aqui
-    
+    console.log(sorting);    
     return cards;
 };
+
 
 const selectCards = (filters, sorting) => {
     return getCards()
