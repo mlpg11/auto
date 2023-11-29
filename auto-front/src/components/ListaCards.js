@@ -13,6 +13,7 @@ function ListaCards({cards}) {
                 titulo={card.titulo}
                 tipo={card.tipo}
                 rentabilidade={card.rentabilidade}
+                rentabilidade_real={card.rentabilidade_real}
                 vencimento={card.vencimento}
                 investimento_minimo={card.investimento_minimo}
                 risco={card.risco}

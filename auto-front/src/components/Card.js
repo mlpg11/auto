@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.css';
 
-function Card({ id, titulo, tipo, rentabilidade, vencimento, investimento_minimo, risco }) {
+function Card({ id, titulo, tipo, rentabilidade, rentabilidade_real, vencimento, investimento_minimo, risco }) {
     
     const getTipoClass = (tipo) => {
         const typeColorMap = {
