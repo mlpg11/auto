@@ -134,7 +134,7 @@ const getCards = async () => {
 */
 const applyFilters = (cards, filters) => {
     // Implemente a lógica de filtragem aqui
-    console.log(cards);
+    console.log(filters);
     return cards;
 };
 
@@ -146,7 +146,7 @@ const applyFilters = (cards, filters) => {
 
 const applySorting = (cards, sorting) => {
     // Implemente a lógica de ordenação aqui
-    console.log(sorting);    
+    console.log(sorting);  
     return cards;
 };
 

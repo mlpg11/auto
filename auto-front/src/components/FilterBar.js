@@ -18,7 +18,6 @@ function FilterBar({ onFilterChange }) {
         setFilters((prevFilters) => {
             const updatedFilters = { ...prevFilters, [name]: checked };
             onFilterChange({ ...updatedFilters, searchTerm });
-            console.log(updatedFilters);
             return updatedFilters;
         });
         
