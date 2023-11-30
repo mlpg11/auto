@@ -3,7 +3,8 @@ import FilterBar from './FilterBar';
 import SortBar from './SortBar';
 import Header from './Header';
 import ListaCards from './ListaCards';
-import SelecionaCards, { selectCards } from './SelecionaCards';
+import { selectCards } from './SelecionaCards';
+import Footer from './Footer';
 
 function Explorar() {
     const [currentCards, setCurrentCards] = useState([]);
@@ -50,6 +51,7 @@ function Explorar() {
             <SortBar onSortChange={handleSortChange} />
             <FilterBar onFilterChange={handleFilterChange} />
             <ListaCards cards={currentCards}/>
+            <Footer></Footer>
         </div>
     );
 }
