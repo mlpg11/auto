@@ -15,14 +15,12 @@ function Explorar() {
         tesouroPrefixado: true,
         tesouroIPCA: true,
         tesouroRenda: true,
-        outros: false,
+        outros: true,
         searchTerm: ''
     });
 
     const handleFilterChange = (newFilters) => {
         setFilters(newFilters);
-        // Aqui você também pode fazer chamadas para atualizar os dados exibidos
-        // com base nos novos filtros
     };
 
     // sort bar
@@ -36,7 +34,6 @@ function Explorar() {
 
     const handleSortChange = (newSorting) => {
         setSorting(newSorting);
-        // Atualize os dados exibidos com base na nova ordenação
     };
 
     useEffect(() => {
@@ -48,8 +45,8 @@ function Explorar() {
     return (
         <div>
             <Header></Header>
-            <SortBar onSortChange={handleSortChange} />
-            <FilterBar onFilterChange={handleFilterChange} />
+            <SortBar onSortChange={handleSortChange} options={sorting}/>
+            <FilterBar onFilterChange={handleFilterChange} options={filters}/>
             <ListaCards cards={currentCards}/>
             <Footer></Footer>
         </div>

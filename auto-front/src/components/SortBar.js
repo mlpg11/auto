@@ -3,16 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp, faSortDown, faSort } from '@fortawesome/free-solid-svg-icons';
 import './SortBar.css';
 
-const sortingOptions = {
-    titulo: '',
-    rentabilidade: '',
-    vencimento: '',
-    minimo: '',
-    risco: '',
-};
-
-function SortBar({ onSortChange }) {
-    const [sorting, setSorting] = useState(sortingOptions);
+function SortBar({ onSortChange , options}) {
+    const [sorting, setSorting] = useState(options);
 
     const handleSortChange = (criteria) => {
         setSorting((prevSorting) => {
@@ -43,7 +35,7 @@ function SortBar({ onSortChange }) {
     return (
         <div className="sort-bar">
             <p className="texto">Ordenar por:</p>
-            {Object.keys(sortingOptions).map((criteria) => (
+            {Object.keys(sorting).map((criteria) => (
                 <button 
                     key={criteria} 
                     onClick={() => handleSortChange(criteria)}

@@ -3,14 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './FilterBar.css';
 
-function FilterBar({ onFilterChange }) {
-    const [filters, setFilters] = useState({
-        tesouroSelic: true,
-        tesouroPrefixado: true,
-        tesouroIPCA: true,
-        tesouroRenda: true,
-        outros: true,
-    });
+function FilterBar({ onFilterChange, options }) {
+    const [filters, setFilters] = useState(options);
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleCheckboxChange = (e) => {
