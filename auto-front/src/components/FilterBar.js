@@ -61,15 +61,6 @@ function FilterBar({ onFilterChange, options }) {
                 />
                 Renda+
             </label>
-            <label id="outros">
-                <input
-                    type="checkbox"
-                    name="outros"
-                    checked={filters.outros}
-                    onChange={handleCheckboxChange}
-                />
-                Outros
-            </label>
         
             {/* Campo de busca com botão */}
             <div className='search-container'>

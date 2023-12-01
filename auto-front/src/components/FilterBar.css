@@ -36,10 +36,6 @@
     color: #144D88;
 }
 
-#outros {
-    color: #122d5f;
-}
-
 /* Contêiner para o campo de busca e botão */
 .search-container {
     display: flex; /* Isso coloca o input e o botão lado a lado */

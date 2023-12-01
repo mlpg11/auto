@@ -15,7 +15,6 @@ function Explorar() {
         tesouroPrefixado: true,
         tesouroIPCA: true,
         tesouroRenda: true,
-        outros: true,
         searchTerm: ''
     });
 
@@ -28,7 +27,6 @@ function Explorar() {
         titulo: '',
         rentabilidade: '',
         vencimento: '',
-        minimo: '',
         risco: '',
     });
 

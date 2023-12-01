@@ -7,118 +7,118 @@ const getCards = async () => {
             rentabilidade: 'SELIC + 0,0436% a.a',
             rentabilidade_real: '12.25',
             vencimento: '01/03/2026',
-            investimento_minimo: 'R$ 141,22',
-            risco: 'Baixo'
+            risco: 'Baixo',
+            nomeToken: 'SL26',
+            valorConversaoPublica: '1.38',
+            valorConversaoSecundario: '1.47'
         },
         {
             id: '1',
-            titulo: 'CDB Banco C6',
-            tipo: 'outros',
-            rentabilidade: '116% do CDI',
-            rentabilidade_real: '14.67',
-            vencimento: '30/11/2027',
-            investimento_minimo: 'R$ 100,00',
-            risco: 'Baixo'
-        },
-        {
-            id: '2',
             titulo: 'TESOURO IPCA+ 2029',
             tipo: 'ipca+',
             rentabilidade: 'IPCA + 5,46% a.a',
             rentabilidade_real: '10.46',
             vencimento: '15/05/2029',
-            investimento_minimo: 'R$ 31,20',
-            risco: 'Médio'
+            risco: 'Médio',
+            nomeToken: 'IP29',
+            valorConversaoPublica: '0.31',
+            valorConversaoSecundario: '0.39'
         },
         {
-            id: '3',
+            id: '2',
             titulo: 'TESOURO SELIC 2029',
             tipo: 'selic',
             rentabilidade: 'SELIC + 0,1718%',
             rentabilidade_real: '12,45',
             vencimento: '01/03/2029',
-            investimento_minimo: 'R$ 140,09',
-            risco: 'Médio'
+            risco: 'Médio',
+            nomeToken: 'SL29',
+            valorConversaoPublica: '1.37',
+            valorConversaoSecundario: '1.47'
         },
         {
-            id: '4',
-            titulo: 'CDB BLB',
-            tipo: 'outros',
-            rentabilidade: '119% CDI',
-            rentabilidade_real: '15.05',
-            vencimento: '01/11/2028',
-            investimento_minimo: 'R$ 100,00',
-            risco: 'Baixo'
-        },
-        {
-            id: '5',
+            id: '3',
             titulo: 'PREFIXADO 2029',
             tipo: 'prefixado',
             rentabilidade: '10,63% a.a',
             rentabilidade_real: '10.63',
             vencimento: '01/01/2029',
-            investimento_minimo: 'R$ 35,93',
-            risco: 'Baixo'
+            risco: 'Baixo',
+            nomeToken: 'PF29',
+            valorConversaoPublica: '0.059',
+            valorConversaoSecundario: '0.069'
         },
         {
-            id: '6',
+            id: '4',
             titulo: 'TESOURO IPCA+ 2045',
             tipo: 'ipca+',
             rentabilidade: 'IPCA + 5,75%',
             rentabilidade_real: '10.75',
             vencimento: '15/05/2045',
-            investimento_minimo: 'R$ 37,78',
-            risco: 'Médio'
+            risco: 'Médio',
+            nomeToken: 'IP45',
+            valorConversaoPublica: '0.12',
+            valorConversaoSecundario: '0.20'
         },
         {
-            id: '7',
+            id: '5',
             titulo: 'TESOURO IPCA+ 2035',
             tipo: 'ipca+',
             rentabilidade: 'IPCA + 5,62% a.a',
             rentabilidade_real: '10.62',
             vencimento: '15/05/2035',
-            investimento_minimo: 'R$ 44,61',
-            risco: 'Médio'
+            risco: 'Médio',
+            nomeToken: 'IP35',
+            valorConversaoPublica: '0.22',
+            valorConversaoSecundario: '0.29'
         },
         {
-            id: '8',
+            id: '6',
             titulo: 'TESOURO RENDA+ 2030',
             tipo: 'renda+',
             rentabilidade: 'IPCA + 5,69% a.a',
             rentabilidade_real: '10.69',
             vencimento: '15/12/2049',
-            investimento_minimo: 'R$ 36,06',
-            risco: 'Médio'
+            risco: 'Médio',
+            nomeToken: 'RM30',
+            valorConversaoPublica: '0.18',
+            valorConversaoSecundario: '0.24'
         },
         {
-            id: '9',
+            id: '7',
             titulo: 'TESOURO RENDA+ 2035',
             tipo: 'renda+',
             rentabilidade: 'IPCA + 5,75% a.a',
             rentabilidade_real: '10.75',
             vencimento: '15/12/2054',
-            investimento_minimo: 'R$ 40,60',
-            risco: 'Médio'
+            risco: 'Médio',
+            nomeToken: 'RM35',
+            valorConversaoPublica: '0.13',
+            valorConversaoSecundario: '0.23'
         },
         {
-            id: '10',
+            id: '8',
             titulo: 'TESOURO RENDA+ 2040',
             tipo: 'renda+',
             rentabilidade: 'IPCA + 5,77% a.a',
             rentabilidade_real: '10.77',
             vencimento: '15/12/2059	',
-            investimento_minimo: 'R$ 30,59',
-            risco: 'Médio'
+            risco: 'Médio',
+            nomeToken: 'RM40',
+            valorConversaoPublica: '0.10',
+            valorConversaoSecundario: '0.20'
         },
         {
-            id: '11',
+            id: '9',
             titulo: 'PREFIXADO 2026',
             tipo: 'prefixado',
             rentabilidade: '10,10% a.a',
             rentabilidade_real: '10.10',
             vencimento: '01/01/2026',
-            investimento_minimo: 'R$ 32,68',
-            risco: 'Baixo'
+            risco: 'Baixo',
+            nomeToken: 'PF26',
+            valorConversaoPublica: '0.080',
+            valorConversaoSecundario: '0.098'
         }
     ];
     return cards;
@@ -127,8 +127,8 @@ const getCards = async () => {
 
 // TODO DEFINIR UM RENTABILIDADE REAL OCULTO NO CARD
 /*
-    cards {int id, string titulo, int tipo, string rentabilidade, string vencimento, string investimento_minimo, string risco}
-    filters {bool tesouroSelic, bool tesouroPrefixado, bool tesouroIPCA, bool tesouroRenda, bool outros, string searchTerm}
+    cards {int id, string titulo, int tipo, string rentabilidade, string vencimento, string risco}
+    filters {bool tesouroSelic, bool tesouroPrefixado, bool tesouroIPCA, bool tesouroRenda,, string searchTerm}
 
     vc pode usar console.log(cards ou filters) pra testar
 */
@@ -140,7 +140,7 @@ const applyFilters = (cards, filters) => {
 
 /*
     sorting ou é 'asc' ou ' ' ou 'desc' asc pra crescente e desc pra decrescente
-    sorting {titulo, rentabilidade, vencimento, minimo, risco}
+    sorting {titulo, rentabilidade, vencimento, risco}
 */ 
 
 

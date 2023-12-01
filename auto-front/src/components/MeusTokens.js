@@ -15,7 +15,6 @@ function MeusTokens() {
         tesouroPrefixado: true,
         tesouroIPCA: true,
         tesouroRenda: true,
-        outros: true,
         searchTerm: ''
     });
 
