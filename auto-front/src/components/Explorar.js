@@ -25,7 +25,7 @@ function Explorar() {
     // sort bar
     const [sorting, setSorting] = useState({
         titulo: '',
-        rentabilidade: '',
+        rentabilidade_real: '',
         vencimento: '',
         risco: '',
     });
@@ -37,6 +37,7 @@ function Explorar() {
     useEffect(() => {
         selectCards(filters, sorting).then(selectedCards => {
             setCurrentCards(selectedCards);
+            console.log(selectedCards);
         });
     }, [filters, sorting]);
 

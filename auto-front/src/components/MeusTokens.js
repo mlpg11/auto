@@ -25,7 +25,7 @@ function MeusTokens() {
     // sort bar
     const [sorting, setSorting] = useState({
         titulo: '',
-        rentabilidade: '',
+        rentabilidade_real: '',
         vencimento: '',
     });
 
