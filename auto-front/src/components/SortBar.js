@@ -40,6 +40,15 @@ function SortBar({ onSortChange , options}) {
             return faSort;
         }
     };
+    
+    const label = (criteria) => {
+        if (criteria === 'rentabilidade_real') {
+            return 'Rentabilidade';
+        } else {
+            // Adiciona o return aqui para garantir que o valor seja retornado
+            return criteria.charAt(0).toUpperCase() + criteria.slice(1);
+        }
+    }
 
     return (
         <div className="sort-bar">
@@ -50,7 +59,7 @@ function SortBar({ onSortChange , options}) {
                     onClick={() => handleSortChange(criteria)}
                     className={getButtonClass(criteria)}
                 >
-                    {criteria.charAt(0).toUpperCase() + criteria.slice(1)}
+                    {label(criteria)}
                     <div className='spacer'></div>
                     <FontAwesomeIcon icon={getSortIcon(criteria)} />
                 </button>

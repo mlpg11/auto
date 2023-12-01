@@ -29,7 +29,7 @@ const getCards = async () => {
             titulo: 'TESOURO SELIC 2029',
             tipo: 'selic',
             rentabilidade: 'SELIC + 0,1718%',
-            rentabilidade_real: '12,45',
+            rentabilidade_real: '12.45',
             vencimento: '01/03/2029',
             risco: 'Médio',
             nomeToken: 'SL29',
