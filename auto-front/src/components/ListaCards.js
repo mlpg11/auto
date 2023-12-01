@@ -3,7 +3,6 @@ import Card from './Card';
 import './ListaCards.css';
 
 function ListaCards({cards}) {
-    
 
     return (
         <div className='grid-cards'>
@@ -17,6 +16,9 @@ function ListaCards({cards}) {
                 vencimento={card.vencimento}
                 investimento_minimo={card.investimento_minimo}
                 risco={card.risco}
+                nomeToken={card.nomeToken} 
+                valorConversaoPublica={card.valorConversaoPublica}
+                valorConversaoSecundario={card.valorConversaoSecundario}
                 />
             ))}
         </div>

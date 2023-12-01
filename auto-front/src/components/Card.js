@@ -52,7 +52,6 @@ function Card({ id, titulo, tipo, rentabilidade, rentabilidade_real, vencimento,
                     <p className="label">RISCO</p> 
                     <p className="data">{risco}</p>
                 </div>
-                <p>{valorConversaoPublica}</p>
             </div>
             
             <div className="card-footer">
