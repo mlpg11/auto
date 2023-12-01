@@ -2,13 +2,37 @@ import React, { useState } from 'react';
 import './Modal.css'; 
 import graph from './graph.JPG';
 
-function Comprar({ titulo, token, valorConversaoPublica, valorConversaoSecundario, closeModal, }) {
-    const [tipoOferta, setTipoOferta] = useState('publica'); // 'publica' ou 'secundario'
+function Comprar({ titulo, token, valorConversaoPublica, valorConversaoSecundario, closeModal }) {
+    const [tipoOferta, setTipoOferta] = useState('publica');
     const [valorETH, setValorETH] = useState('');
     const [valorToken, setValorToken] = useState('');
     const [novoSaldo, setNovoSaldo] = useState('');
-    console.log(titulo, token, valorConversaoPublica, valorConversaoSecundario);
-    // Funções para manipular os inputs (você precisa adicionar a lógica de conversão aqui)
+
+    const calcularValorToken = (eth, valorConversao) => (eth / valorConversao).toFixed(4);
+    const calcularValorETH = (tokens, valorConversao) => (tokens * valorConversao).toFixed(4);
+
+    const handleValorETHChange = (e) => {
+        const eth = e.target.value;
+        const valorConversao = tipoOferta === 'publica' ? valorConversaoPublica : valorConversaoSecundario;
+        setValorETH(eth);
+        setValorToken(calcularValorToken(eth, valorConversao));
+    };
+
+    const handleValorTokenChange = (e) => {
+        const tokens = e.target.value;
+        const valorConversao = tipoOferta === 'publica' ? valorConversaoPublica : valorConversaoSecundario;
+        setValorToken(tokens);
+        setValorETH(calcularValorETH(tokens, valorConversao));
+        setNovoSaldo(tokens);
+    };
+
+    const handleTipoOfertaChange = (novoTipo) => {
+        setTipoOferta(novoTipo);
+        const valorConversao = novoTipo === 'publica' ? valorConversaoPublica : valorConversaoSecundario;
+        setValorToken(calcularValorToken(valorETH, valorConversao));
+        // O novo saldo deve ser recalculado com a nova taxa de conversão
+        setNovoSaldo(calcularValorToken(valorETH, valorConversao));
+    };
 
     return (
         <div className="modal-overlay">
@@ -16,31 +40,30 @@ function Comprar({ titulo, token, valorConversaoPublica, valorConversaoSecundari
                 <button onClick={closeModal} className="close-button">&times;</button>
                 <h2>{titulo} (<span className='purple-text'>{token}</span>)</h2>
                 <div className="oferta-selector">
-                    <button onClick={() => setTipoOferta('publica')} className={tipoOferta === 'publica' ? 'active' : ''}>OFERTA PÚBLICA</button>
-                    <button onClick={() => setTipoOferta('secundario')} className={tipoOferta === 'secundario' ? 'active' : ''}>MERCADO SECUNDÁRIO</button>
+                    <button onClick={() => handleTipoOfertaChange('publica')} className={tipoOferta === 'publica' ? 'active' : ''}>OFERTA PÚBLICA</button>
+                    <button onClick={() => handleTipoOfertaChange('secundario')} className={tipoOferta === 'secundario' ? 'active' : ''}>MERCADO SECUNDÁRIO</button>
                 </div>
-                <img src={graph} alt="Gráfico de desempenho" />
+                <img src={graph} alt="Gráfico de desempenho" className="graph-img" />
                 <div className="conversao-rate">
-                    <p>TAXA: {tipoOferta === 'publica' ? valorConversaoPublica : valorConversaoSecundario} <span className='purple-text'>ETH</span> → 1 <span className='purple-text'>{token}</span></p>
+                    <p>TAXA: <span className='purple-text'>{tipoOferta === 'publica' ? valorConversaoPublica : valorConversaoSecundario} ETH</span> → 1 <span className='purple-text'>{token}</span></p>
                 </div>
                 <div className="inputs">
                     <input
-                        type="text"
+                        type="number"
                         value={valorETH}
-                        onChange={(e) => setValorETH(e.target.value)}
+                        onChange={handleValorETHChange}
                         placeholder="ETH"
                     />
-                    <span className='purple-text'><p>ETH</p></span>
-                    <p> → </p>
+                    <span className='purple-text'>ETH → </span>
                     <input
-                        type="text"
+                        type="number"
                         value={valorToken}
-                        onChange={(e) => setValorToken(e.target.value)}
-                        placeholder={`${token}`}
+                        onChange={handleValorTokenChange}
+                        placeholder={token}
                     />
-                    <span className='purple-text'><p>{token}</p></span>
+                    <span className='purple-text'>{token}</span>
                 </div>
-                <p>Novo saldo: {novoSaldo} Tokens <span className='purple-text'>${token}</span></p>
+                <p>Novo saldo: <span className='purple-text'>{novoSaldo} Tokens {token}</span></p>
                 <div className="modal-buttons">
                     <button className="detalhes-button">Detalhes</button>
                     <button className="comprar-button">Comprar</button>
