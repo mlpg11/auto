@@ -40,6 +40,10 @@ function Card({ id, titulo, tipo, rentabilidade, rentabilidade_real, vencimento,
                     <p className="label">RENTABILIDADE</p> 
                     <p className="data">{rentabilidade}</p>
                 </div>
+                <div className="data-container" id="rentabilidade_real">
+                    <p className="label">RENTABILIDADE REAL</p> 
+                    <p className="data">{rentabilidade_real}% a.a</p>
+                </div>
                 <div className="data-container" id="vencimento">
                     <p className="label">VENCIMENTO</p> 
                     <p className="data">{vencimento}</p>
@@ -48,6 +52,7 @@ function Card({ id, titulo, tipo, rentabilidade, rentabilidade_real, vencimento,
                     <p className="label">RISCO</p> 
                     <p className="data">{risco}</p>
                 </div>
+                <p>{valorConversaoPublica}</p>
             </div>
             
             <div className="card-footer">
