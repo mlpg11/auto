@@ -8,6 +8,15 @@ function SortBar({ onSortChange , options}) {
 
     const handleSortChange = (criteria) => {
         setSorting((prevSorting) => {
+
+            for(const key in prevSorting){
+                if(key == criteria) continue;
+                
+                if(prevSorting[key]!=''){
+                    prevSorting[key]='';
+                }
+            }
+
             const newDirection= prevSorting[criteria] === '' ? 'asc' : 
                                 prevSorting[criteria] === 'asc' ? 'desc' : '';
             const newSorting = { ...prevSorting, [criteria]: newDirection };

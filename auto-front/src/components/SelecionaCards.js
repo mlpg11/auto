@@ -102,7 +102,7 @@ const getCards = async () => {
             tipo: 'renda+',
             rentabilidade: 'IPCA + 5,77% a.a',
             rentabilidade_real: '10.77',
-            vencimento: '15/12/2059	',
+            vencimento: '15/12/2059',
             risco: 'Médio',
             nomeToken: 'RM40',
             valorConversaoPublica: '0.10',
@@ -134,8 +134,46 @@ const getCards = async () => {
 */
 const applyFilters = (cards, filters) => {
     // Implemente a lógica de filtragem aqui
-    console.log(filters);
-    return cards;
+
+    let selicCards = [];
+    let preCards = [];
+    let ipcaCards = [];
+    let rendaCards = [];
+
+    for(const card of cards){
+        if(card['tipo']=='selic'){
+            selicCards.push(card);
+        }
+        if(card['tipo']=='prefixado'){
+            preCards.push(card);
+        }
+        if(card['tipo']=='ipca+'){
+            ipcaCards.push(card);
+        }
+        if(card['tipo']=='renda+'){
+            rendaCards.push(card);
+        }
+    }
+
+    let allCards = [];
+
+    if(filters.tesouroSelic){
+        allCards = allCards.concat(selicCards);
+    }
+
+    if(filters.tesouroPrefixado){
+        allCards = allCards.concat(preCards);
+    }
+
+    if(filters.tesouroIPCA){
+        allCards = allCards.concat(ipcaCards);
+    }
+
+    if(filters.tesouroRenda){
+        allCards = allCards.concat(rendaCards);
+    }
+
+    return allCards;
 };
 
 /*
@@ -143,10 +181,61 @@ const applyFilters = (cards, filters) => {
     sorting {titulo, rentabilidade, vencimento, risco}
 */ 
 
+const Risco = {
+    'Baixo' : 0,
+    'Médio' : 1,
+    'Alto' : 2
+};
+
+const sortBy = (key) => {
+    return function(a, b){
+        let a_r = a[key];
+        let b_r = b[key];
+
+        if(key=='risco'){
+            a_r = Risco[a_r];
+            b_r = Risco[b_r];
+        }
+
+        if(key=='vencimento'){
+            let ano_a, mes_a, dia_a, ano_b, mes_b, dia_b;
+
+            ano_a = a_r.substring(6, 10);
+            mes_a = a_r.substring(3, 5);
+            dia_a = a_r.substring(0, 2);
+
+            ano_b = b_r.substring(6, 10);
+            mes_b = b_r.substring(3, 5);
+            dia_b = b_r.substring(0, 2);
+
+            a_r = ano_a + '/' + mes_a + '/' + dia_a;
+            b_r = ano_b + '/' + mes_b + '/' + dia_b;
+        }
+
+        return (a_r > b_r) - (a_r < b_r);
+    };
+};
 
 const applySorting = (cards, sorting) => {
     // Implemente a lógica de ordenação aqui
-    console.log(sorting);  
+
+    let chave;
+    let order = 0;
+
+    for(const key in sorting){
+        let temp = sorting[key];
+        if(temp!=''){
+            chave = key;
+            if(temp=='desc') order = 1;
+        }
+    }
+
+    cards.sort(sortBy(chave));
+
+    if(order){
+        cards.reverse();
+    }
+
     return cards;
 };
 
