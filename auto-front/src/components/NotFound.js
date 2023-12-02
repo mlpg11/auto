@@ -4,8 +4,15 @@ import logoImage from '../assets/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
+import { useLanguage } from '../LanguageContext';
+import NotFoundEn from '../components_en/NotFound';
 
 function NotFound() {
+    const { isEnglish } = useLanguage();
+
+    if (isEnglish) {
+        return <NotFoundEn />;
+    }
     return (
         <div id="main">
             <div id="logo">

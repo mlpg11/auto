@@ -5,8 +5,12 @@ import Header from './Header';
 import ListaCards from './ListaCards';
 import { selectCards } from './SelecionaCards';
 import Footer from './Footer';
+import { useLanguage } from '../LanguageContext';
+import ExplorarEn from '../components_en/Explorar';
 
 function Explorar() {
+    const { isEnglish } = useLanguage();
+
     const [currentCards, setCurrentCards] = useState([]);
 
     // filter bar
@@ -40,6 +44,10 @@ function Explorar() {
         });
     }, [filters, sorting]);
 
+    if (isEnglish) {
+        return <ExplorarEn/>;
+    }
+    
     return (
         <div>
             <Header></Header>
@@ -50,5 +58,6 @@ function Explorar() {
         </div>
     );
 }
+
 
 export default Explorar;

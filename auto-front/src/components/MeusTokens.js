@@ -5,9 +5,12 @@ import Header from './Header';
 import ListaCards from './ListaCards';
 import { selectCards } from './SelecionaCards';
 import Footer from './Footer';
+import { useLanguage } from '../LanguageContext';
+import MeusTokensEn from '../components_en/MeusTokens';
 
 function MeusTokens() {
     const [currentCards, setCurrentCards] = useState([]);
+    const { isEnglish } = useLanguage();
 
     // filter bar
     const [filters, setFilters] = useState({
@@ -38,6 +41,10 @@ function MeusTokens() {
             setCurrentCards(selectedCards);
         });
     }, [filters, sorting]);
+
+    if (isEnglish) {
+        return <MeusTokensEn />;
+    }
 
     return (
         <div>

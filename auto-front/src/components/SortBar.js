@@ -8,22 +8,20 @@ function SortBar({ onSortChange , options}) {
 
     const handleSortChange = (criteria) => {
         setSorting((prevSorting) => {
-
-            for(const key in prevSorting){
-                if(key == criteria) continue;
-                
-                if(prevSorting[key]!=''){
-                    prevSorting[key]='';
-                }
-            }
-
-            const newDirection= prevSorting[criteria] === '' ? 'asc' : 
-                                prevSorting[criteria] === 'asc' ? 'desc' : '';
-            const newSorting = { ...prevSorting, [criteria]: newDirection };
+            const newSorting = { ...prevSorting }; // Cria uma cópia do estado anterior
+    
+            // Reseta os outros critérios antes de definir o novo
+            Object.keys(newSorting).forEach(key => {
+                if(key !== criteria) newSorting[key] = '';
+            });
+    
+            newSorting[criteria] = newSorting[criteria] === 'asc' ? 'desc' : 'asc';
+    
             onSortChange(newSorting);
             return newSorting;
         });
     };
+    
 
     const getButtonClass = (criteria) => {
         const direction = sorting[criteria];
@@ -44,7 +42,13 @@ function SortBar({ onSortChange , options}) {
     const label = (criteria) => {
         if (criteria === 'rentabilidade_real') {
             return 'Rentabilidade';
-        } else {
+        } 
+        
+        else if (criteria === 'valorFinal') {
+            return 'Montante Final';
+        }
+
+        else {
             // Adiciona o return aqui para garantir que o valor seja retornado
             return criteria.charAt(0).toUpperCase() + criteria.slice(1);
         }

@@ -2,7 +2,7 @@ const getCards = async () => {
     const cards = [
         {
             id: '0',
-            title: 'SELIC TREASURE 2026',
+            title: 'SELIC TITLE 2026',
             tipo: 'selic',
             profitability: 'SELIC + 0,0436%',
             real_profitability: '12.25',
@@ -14,7 +14,7 @@ const getCards = async () => {
         },
         {
             id: '1',
-            title: 'IPCA+ TREASURE 2029',
+            title: 'IPCA+ TITLE 2029',
             tipo: 'ipca+',
             profitability: 'IPCA + 5,46%',
             real_profitability: '10.46',
@@ -26,7 +26,7 @@ const getCards = async () => {
         },
         {
             id: '2',
-            title: 'SELIC TREASURE 2029',
+            title: 'SELIC TITLE 2029',
             tipo: 'selic',
             profitability: 'SELIC + 0,1718%',
             real_profitability: '12.45',
@@ -38,7 +38,7 @@ const getCards = async () => {
         },
         {
             id: '3',
-            title: 'PREFIXED TREASURE 2029',
+            title: 'PREFIXED TITLE 2029',
             tipo: 'prefixado',
             profitability: '10,63%',
             real_profitability: '10.63',
@@ -50,7 +50,7 @@ const getCards = async () => {
         },
         {
             id: '4',
-            title: 'IPCA+ TREASURE 2045',
+            title: 'IPCA+ TITLE 2045',
             tipo: 'ipca+',
             profitability: 'IPCA + 5,75%',
             real_profitability: '10.75',
@@ -62,7 +62,7 @@ const getCards = async () => {
         },
         {
             id: '5',
-            title: 'IPCA+ TREASURE 2035',
+            title: 'IPCA+ TITLE 2035',
             tipo: 'ipca+',
             profitability: 'IPCA + 5,62%',
             real_profitability: '10.62',
@@ -74,7 +74,7 @@ const getCards = async () => {
         },
         {
             id: '6',
-            title: 'RENDA+ TREASURE 2030',
+            title: 'RENDA+ TITLE 2030',
             tipo: 'renda+',
             profitability: 'IPCA + 5,69%',
             real_profitability: '10.69',
@@ -86,7 +86,7 @@ const getCards = async () => {
         },
         {
             id: '7',
-            title: 'RENDA+ TREASURE 2035',
+            title: 'RENDA+ TITLE 2035',
             tipo: 'renda+',
             profitability: 'IPCA + 5,75%',
             real_profitability: '10.75',
@@ -98,7 +98,7 @@ const getCards = async () => {
         },
         {
             id: '8',
-            title: 'RENDA+ TREASURE 2040',
+            title: 'RENDA+ TITLE 2040',
             tipo: 'renda+',
             profitability: 'IPCA + 5,77%',
             real_profitability: '10.77',
@@ -110,7 +110,7 @@ const getCards = async () => {
         },
         {
             id: '9',
-            title: 'PREFIXED TREASURE 2026',
+            title: 'PREFIXED TITLE 2026',
             tipo: 'prefixado',
             profitability: '10,10%',
             real_profitability: '10.10',

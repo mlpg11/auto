@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 import './ListaCards.css';
 
-function ListaCards({cards}) {
+function ListaCards2({cards}) {
 
     return (
         <div className='grid-cards'>
@@ -18,6 +18,9 @@ function ListaCards({cards}) {
                 risco={card.risco}
                 nomeToken={card.nomeToken} 
                 valorConversaoPublica={card.valorConversaoPublica}
+                valorFinal={card.valorFinal}
+                totalInvestido={card.totalInvestido}
+                ganho={card.ganho}
                 />
             ))}
         </div>
@@ -25,4 +28,4 @@ function ListaCards({cards}) {
     );
 }
 
-export default ListaCards;
+export default ListaCards2;

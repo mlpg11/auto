@@ -24,10 +24,10 @@ function Explorar() {
 
     // sort bar
     const [sorting, setSorting] = useState({
-        titulo: '',
-        rentabilidade_real: '',
-        vencimento: '',
-        risco: '',
+        title: '',
+        real_profitability: '',
+        due: '',
+        risk: '',
     });
 
     const handleSortChange = (newSorting) => {

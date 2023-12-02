@@ -1,19 +1,25 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { LanguageProvider } from './LanguageContext';
 import Explorar from './components/Explorar';
 import MeusTokens from './components/MeusTokens';
 import NotFound from './components/NotFound';
+import Simular from './components/Simular';
+
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Routes>
-          <Route exact path="/" element={<Explorar/>}/>
-          <Route exact path="/explorar" element={<Explorar/>}/>
-          <Route exact path="/meus-tokens" element={<MeusTokens/>} />
-          <Route path="*" element={<NotFound/>}/>
-        </Routes>
-      </div>
+      <LanguageProvider>
+        <div className="App">
+          <Routes>
+            <Route exact path="/" element={<Explorar/>}/>
+            <Route exact path="/explorar" element={<Explorar/>}/>
+            <Route exact path="/meus-tokens" element={<MeusTokens/>} />
+            <Route exact path="/simular" element={<Simular/>} />
+            <Route path="*" element={<NotFound/>}/>
+          </Routes>
+        </div>
+      </LanguageProvider>
     </Router>
   );
 }

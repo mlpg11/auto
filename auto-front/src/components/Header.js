@@ -4,9 +4,11 @@ import logoImage from '../assets/logo.png';
 import iconImage from '../assets/icon.png';
 import { NavLink } from 'react-router-dom';
 import { useSDK } from '@metamask/sdk-react';
+import { useLanguage } from '../LanguageContext';
 
 function Header() {
   const { sdk, connected } = useSDK();
+  const { isEnglish, toggleLanguage } = useLanguage();
 
   const connectWalletHandler = async () => {
     try {
@@ -36,12 +38,15 @@ function Header() {
           <li>
             <NavLink to="/meus-tokens" className="nav-link" activeClassName="active">Meus tokens</NavLink>
           </li>
+          <li>
+            <NavLink to="/simular" className="nav-link" activeClassName="active">Simular</NavLink>
+          </li>
         </ul>
       </nav>
 
       {/* Botão de Tradução */}
-      <button onClick={translateToEn} className="en-button">
-        {connected ? 'Conectado' : 'Conectar Carteira'}
+      <button onClick={toggleLanguage} className="language-button">
+        {isEnglish ? 'PT' : 'EN'}
       </button>
 
       {/* Botão de Conectar Carteira */}

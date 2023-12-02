@@ -34,7 +34,7 @@ function Card({ id, title, tipo, profitability, real_profitability, due, risk, n
 
     return (
         <div className="card">
-            <div className={`card-header ${getTipoClass(tipo)}`}>{titulo}</div>
+            <div className={`card-header ${getTipoClass(tipo)}`}>{title}</div>
             <div className="card-body">
                 <div className="data-container" id="rentabilidade">
                     <p className="label">PROFITABILITY</p> 
@@ -91,7 +91,7 @@ function Card({ id, title, tipo, profitability, real_profitability, due, risk, n
                 overlayClassName="modal-overlay"
             >
                 <Comprar 
-                    titulo={title}
+                    title={title}
                     token={nomeToken}
                     valorConversaoPublica={valorConversaoPublica}
                     valorConversaoSecundario={valorConversaoSecundario}
