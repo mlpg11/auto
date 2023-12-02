@@ -8,15 +8,24 @@ contract DrexMock is ERC20 {
 
     address immutable _tesourarias;
 
-    constructor(address tesourarias) ERC20("Drex", "DRX", DECIMALS) {
+    address immutable _operador;
+
+    constructor(address tesourarias, address operador) ERC20("Drex", "DRX", DECIMALS) {
         _mint(msg.sender, 1_000 * 10 ** DECIMALS);
 
         _tesourarias = tesourarias;
+        _operador = operador;
     }
 
     function mintarBonus(uint256 amount) external {
         require(msg.sender == _tesourarias, "DrexMock: Apenas Tesourarias pode mintar");
 
         _mint(_tesourarias, amount);
+    }
+
+    function mintar(uint256 amount) external {
+        require(msg.sender == _operador, "DrexMock: Apenas operador pode mintar");
+
+        _mint(_operador, amount);
     }
 }

@@ -22,7 +22,7 @@ contract DeployEnv is Script {
         vm.startBroadcast();
 
         tesouro = new TesouroDireitoTokenizado();
-        drex = new DrexMock(address(tesouro));
+        drex = new DrexMock(address(tesouro), DEPLOYER);
         ipca = new IpcaOraculo(DEPLOYER);
         cdi = new CdiOraculo(DEPLOYER);
         taxaDeJuros = new TaxaDeJurosOraculo(DEPLOYER);
