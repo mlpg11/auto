@@ -14,10 +14,10 @@ function Header() {
         // Tenta conectar com a MetaMask
         await sdk.connect();
       } else {
-        console.log('Já está conectado');
+        console.log('Already connected');
       }
     } catch (error) {
-      console.error('Erro ao conectar com a MetaMask:', error);
+      console.error('Error connecting with MetaMask:', error);
     }
   };
 
@@ -31,22 +31,17 @@ function Header() {
       <nav>
         <ul className="nav-links">
           <li>
-            <NavLink to="/explorar" className="nav-link" activeClassName="active">Explorar</NavLink>
+            <NavLink to="/explorar" className="nav-link" activeClassName="active">Explore</NavLink>
           </li>
           <li>
-            <NavLink to="/meus-tokens" className="nav-link" activeClassName="active">Meus tokens</NavLink>
+            <NavLink to="/meus-tokens" className="nav-link" activeClassName="active">My tokens</NavLink>
           </li>
         </ul>
       </nav>
 
-      {/* Botão de Tradução */}
-      <button onClick={translateToEn} className="en-button">
-        {connected ? 'Conectado' : 'Conectar Carteira'}
-      </button>
-
       {/* Botão de Conectar Carteira */}
       <button onClick={connectWalletHandler} className="wallet-button">
-        {connected ? 'Conectado' : 'Conectar Carteira'}
+        {connected ? 'Connected' : 'Connect Wallet'}
       </button>
     </header>
   );

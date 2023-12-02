@@ -1,0 +1,76 @@
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff; /* Cor de fundo da barra */
+    padding: 10px;
+    padding-bottom: 20px;
+    box-shadow: 0 5px 6px rgba(0,0,0,0.1); /* Sombra suave para a barra */
+}
+
+.filter-bar label {
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.filter-bar input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+#tesouroSelic {
+    color: #139F7B;;
+}
+
+#tesouroPrefixado {
+    color: #0FA291;
+}
+
+#tesouroIPCA {
+    color: #0986AA;
+}
+
+#tesouroRenda {
+    color: #144D88;
+}
+
+/* Contêiner para o campo de busca e botão */
+.search-container {
+    display: flex; /* Isso coloca o input e o botão lado a lado */
+}
+
+.filter-bar input[type="search"] {
+    padding: 5px 10px;
+    border: 1px solid #CCCCCC; /* Borda cinza para os inputs */
+    border-radius: 1px; /* Bordas arredondadas */
+    flex-grow: 1;
+    margin-left: 40px;
+    border-top-right-radius: 0; /* Remove a borda arredondada do lado direito do input */
+    border-bottom-right-radius: 0; /* Remove a borda arredondada do lado direito do input */
+    margin-right: 0; /* Remove a margem entre o input e o botão */
+}
+
+/* Estilo para o botão de busca */
+.filter-bar .search-button {
+    padding: 5px 10px;
+    background: #E0E0E0;
+    border: 1px solid #CCCCCC;
+    border-left: none; /* Remove a borda esquerda para juntar com o campo de busca */
+    border-top-right-radius: 4px; /* Bordas arredondadas somente do lado direito do botão */
+    border-bottom-right-radius: 4px; /* Bordas arredondadas somente do lado direito do botão */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-bar .search-button:hover {
+    background: #CCCCCC;
+}
+
+/* Se você está usando FontAwesome, você pode precisar ajustar o tamanho do ícone */
+.filter-bar .fa-search {
+    font-size: 1em;
+}
