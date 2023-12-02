@@ -78,7 +78,9 @@ contract MultiTesourariasTest is Test {
 
         _drex.approve(address(_multiTesourarias), depositoInicialUsuario);
 
-        _multiTesourarias.depositar("Ok", TesouroDireitoTokenizado.Tipos_Titulo.IPCA, 200, 365 days, depositoInicialUsuario, 1);
+        _multiTesourarias.depositar(
+            "Ok", TesouroDireitoTokenizado.Tipos_Titulo.IPCA, 200, 365 days, depositoInicialUsuario, 1
+        );
 
         assertEq(_multiTesourarias.totalAssets(), depositoInicialUsuario);
         assertEq(_multiTesourarias.totalSupply(), depositoInicialUsuario);

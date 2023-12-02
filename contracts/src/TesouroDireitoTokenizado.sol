@@ -72,7 +72,14 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
      * @param amount Quantidade de DREX a ser depositada
      * @param risco 0 = baixo, 1 = medio, 2 = alto
      */
-    function depositar(string calldata nomeTitulo, Tipos_Titulo tipo, uint256 minimo, uint256 duracao, uint256 amount, uint8 risco) public returns (uint256 shares) {
+    function depositar(
+        string calldata nomeTitulo,
+        Tipos_Titulo tipo,
+        uint256 minimo,
+        uint256 duracao,
+        uint256 amount,
+        uint8 risco
+    ) public returns (uint256 shares) {
         // Verificações de validação
         require(amount > 0, "MultiTesourarias: Deposito minimo de 1 DREX");
         if (duracao != 0 && duracao % 365 days != 0) {
@@ -95,7 +102,9 @@ contract TesouroDireitoTokenizado is ERC721, Owned {
         uint256 multiplicador_ = multiplicador[duracao];
 
         // Cria e armazena o depósito
-        depositos[currentId] = Deposito(nomeTitulo, tipo, minimo, shares, block.timestamp + duracao, block.timestamp, "", multiplicador_, risco);
+        depositos[currentId] = Deposito(
+            nomeTitulo, tipo, minimo, shares, block.timestamp + duracao, block.timestamp, "", multiplicador_, risco
+        );
 
         // Cunha um novo NFT para o depósito
         _mint(msg.sender, currentId);
