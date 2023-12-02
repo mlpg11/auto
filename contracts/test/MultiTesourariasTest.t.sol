@@ -18,7 +18,7 @@ contract MultiTesourariasTest is Test {
         vm.startPrank(GOV);
 
         _multiTesourarias = new TesouroDireitoTokenizado();
-        _drex = new DrexMock(address(_multiTesourarias));
+        _drex = new DrexMock(address(_multiTesourarias), GOV);
 
         _multiTesourarias.setarDrex(_drex);
 
@@ -44,11 +44,7 @@ contract MultiTesourariasTest is Test {
 
         _drex.approve(address(_multiTesourarias), 100e18);
 
-        _multiTesourarias.depositar(0, 100e18, 0);
-
-        (uint256 a,,,,,) = _multiTesourarias.depositos(0);
-
-        console.log("Teste; %s", a);
+        _multiTesourarias.depositar("Ok", TesouroDireitoTokenizado.Tipos_Titulo.IPCA, 200, 0, 100e18, 0);
 
         console.log("URI: %s", _multiTesourarias.tokenURI(0));
 
@@ -82,7 +78,7 @@ contract MultiTesourariasTest is Test {
 
         _drex.approve(address(_multiTesourarias), depositoInicialUsuario);
 
-        _multiTesourarias.depositar(365 days, depositoInicialUsuario, 1);
+        _multiTesourarias.depositar("Ok", TesouroDireitoTokenizado.Tipos_Titulo.IPCA, 200, 365 days, depositoInicialUsuario, 1);
 
         assertEq(_multiTesourarias.totalAssets(), depositoInicialUsuario);
         assertEq(_multiTesourarias.totalSupply(), depositoInicialUsuario);
