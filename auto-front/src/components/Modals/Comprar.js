@@ -67,15 +67,12 @@ function Comprar({ titulo, token, valorConversaoPublica, valorConversaoSecundari
             // let balance = await provider.getBalance();
             const erc20 = new ethers.Contract("0x9A86494Ba45eE1f9EEed9cFC0894f6C5d13a1F0b", contractABI, signer);
             let valorETHs = valorETH.toString();
-            try{
-                const tx = erc20.comprar({value: ethers.parseEther(valorETHs)});
-                const receipt = provider.getTransactionReceipt(tx.hash);
+            const tx = erc20.comprar({value: ethers.parseEther(valorETHs)});
+            
+            const receipt = provider.getTransactionReceipt(tx.hash);
 
                 // const events = erc20.interface.parseLog(receipt.logs[0]);
                 // console.log(events);
-            }catch(error){
-                console.log("error");
-            }
         }
     };
 
