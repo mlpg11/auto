@@ -10,7 +10,7 @@ import en from '../assets/en.png';
 
 function Header() {
   const { sdk, connected } = useSDK();
-  const { isEnglish, toggleLanguage } = useLanguage()
+  const { isEnglish, toggleLanguage } = useLanguage();
 
   const connectWalletHandler = async () => {
     try {
@@ -18,10 +18,10 @@ function Header() {
         // Tenta conectar com a MetaMask
         await sdk.connect();
       } else {
-        console.log('Already connected');
+        console.log('Já está conectado');
       }
     } catch (error) {
-      console.error('Error connecting with MetaMask:', error);
+      console.error('Erro ao conectar com a MetaMask:', error);
     }
   };
 
@@ -35,22 +35,29 @@ function Header() {
       <nav>
         <ul className="nav-links">
           <li>
-            <NavLink to="/explorar" className="nav-link" activeClassName="active">Explore</NavLink>
+            <NavLink to="/explorar" className="nav-link" activeClassName="active">Explorar</NavLink>
           </li>
           <li>
-            <NavLink to="/meus-tokens" className="nav-link" activeClassName="active">My tokens</NavLink>
+            <NavLink to="/meus-tokens" className="nav-link" activeClassName="active">Meus tokens</NavLink>
+          </li>
+          <li>
+            <NavLink to="/simular" className="nav-link" activeClassName="active">Simular</NavLink>
           </li>
         </ul>
       </nav>
 
       {/* Botão de Tradução */}
+      {/* Botão de Tradução */}
       <button onClick={toggleLanguage} className="language-button">
-        {isEnglish ? 'PT' : 'EN'}
+        <img className='language-button'
+          src={isEnglish ? en : pt} 
+          alt={isEnglish ? "Switch to Portuguese" : "Switch to English"} 
+        />
       </button>
 
       {/* Botão de Conectar Carteira */}
       <button onClick={connectWalletHandler} className="wallet-button">
-        {connected ? 'Connected' : 'Connect Wallet'}
+        {connected ? 'Conectado' : 'Conectar Carteira'}
       </button>
     </header>
   );

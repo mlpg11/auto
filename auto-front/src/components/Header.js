@@ -5,6 +5,8 @@ import iconImage from '../assets/icon.png';
 import { NavLink } from 'react-router-dom';
 import { useSDK } from '@metamask/sdk-react';
 import { useLanguage } from '../LanguageContext';
+import pt from '../assets/pt.png';
+import en from '../assets/en.png';
 
 function Header() {
   const { sdk, connected } = useSDK();
@@ -41,12 +43,19 @@ function Header() {
           <li>
             <NavLink to="/simular" className="nav-link" activeClassName="active">Simular</NavLink>
           </li>
+          <li>
+            <NavLink to="/transparencia" className="nav-link" activeClassName="active">Transparência</NavLink>
+          </li>
         </ul>
       </nav>
 
       {/* Botão de Tradução */}
+      {/* Botão de Tradução */}
       <button onClick={toggleLanguage} className="language-button">
-        {isEnglish ? 'PT' : 'EN'}
+        <img className='language-button'
+          src={isEnglish ? en : pt} 
+          alt={isEnglish ? "Switch to Portuguese" : "Switch to English"} 
+        />
       </button>
 
       {/* Botão de Conectar Carteira */}

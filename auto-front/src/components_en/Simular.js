@@ -123,7 +123,7 @@ function Simular() {
     return (
         <div>
             <Header></Header>
-            <h2 style={titleStyle}>Simule o seu Investimento</h2>
+            
             <SimulateBar onSimulate={handleSimulate} />
             <Poupanca montanteFinal={poupancaSimAtual.montanteFinal} totalInvestido={poupancaSimAtual.totalInvestido} ganho={poupancaSimAtual.ganho}/>
             <SortBar onSortChange={handleSortChange} options={sorting} />

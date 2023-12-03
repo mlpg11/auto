@@ -47,15 +47,15 @@ function Card({ id, titulo, tipo, rentabilidade, rentabilidade_real, vencimento,
                     </div>
                     <div className="data-container" id="valorFinal">
                         <p className="label">MONTANTE FINAL</p> 
-                        <p className="data">{valorFinal} <span className='purple'> ETH</span></p>
+                        <p className="data">{valorFinal} ETH</p>
                     </div>
                     <div className="data-container" id="totalInvestido">
                         <p className="label">TOTAL INVESTIDO</p> 
-                        <p className="data">{totalInvestido} <span className='purple'>ETH</span></p>
+                        <p className="data">{totalInvestido} ETH</p>
                     </div>
                     <div className="data-container" id="ganho">
                         <p className="label">GANHO</p> 
-                        <p className="data"><span className='green'>+ {ganho}</span> <span className='purple'>ETH</span></p>
+                        <p className="data"><span className='green'>+ {ganho} ETH</span></p>
                     </div>
                 </div>
                 

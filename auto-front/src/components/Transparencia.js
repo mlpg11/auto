@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import FilterBar from './FilterBar';
 import SortBar from './SortBar';
 import Header from './Header';
 import ListaCards from './ListaCards';
 import { selectCards } from './SelecionaCards';
 import Footer from './Footer';
 import { useLanguage } from '../LanguageContext';
-import ExplorarEn from '../components_en/Explorar';
 
-function Explorar() {
-    const { isEnglish } = useLanguage();
-
+function Transparencia() {
     const [currentCards, setCurrentCards] = useState([]);
 
     // filter bar
@@ -31,7 +27,6 @@ function Explorar() {
         titulo: '',
         rentabilidade_real: '',
         vencimento: '',
-        risco: '',
     });
 
     const handleSortChange = (newSorting) => {
@@ -44,28 +39,20 @@ function Explorar() {
         });
     }, [filters, sorting]);
 
-    if (isEnglish) {
-        return <ExplorarEn/>;
-    }
-
     const titleStyle = {
         marginBottom: '0',
         fontSize: '2em',
         fontWeight: '200',
         marginLeft: '5%'
     }
-    
     return (
         <div>
             <Header></Header>
-            <h2 style={titleStyle}>Explore os Títulos</h2>
-            <SortBar onSortChange={handleSortChange} options={sorting}/>
-            <FilterBar onFilterChange={handleFilterChange} options={filters}/>
-            <ListaCards cards={currentCards}/>
-            <Footer/>
+            <h2 style={titleStyle}>Portal da Transparência</h2>
+            <SortBar onSortingChange={handleSortChange} options={sorting}></SortBar>
+            <Footer></Footer>
         </div>
     );
 }
 
-
-export default Explorar;
+export default Transparencia;

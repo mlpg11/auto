@@ -8,22 +8,21 @@ function SortBar({ onSortChange , options}) {
 
     const handleSortChange = (criteria) => {
         setSorting((prevSorting) => {
-
-            for(const key in prevSorting){
-                if(key == criteria) continue;
-                
-                if(prevSorting[key]!=''){
-                    prevSorting[key]='';
-                }
-            }
-
-            const newDirection= prevSorting[criteria] === '' ? 'asc' : 
-                                prevSorting[criteria] === 'asc' ? 'desc' : '';
-            const newSorting = { ...prevSorting, [criteria]: newDirection };
+            const newSorting = { ...prevSorting }; // Cria uma cópia do estado anterior
+    
+            // Reseta os outros critérios antes de definir o novo
+            Object.keys(newSorting).forEach(key => {
+                if(key !== criteria) newSorting[key] = '';
+            });
+    
+            //newSorting[criteria] = newSorting[criteria] === 'asc' ? 'desc' : 'asc';
+            newSorting[criteria] = newSorting[criteria] === 'asc' ? 'desc' : newSorting[criteria] === 'desc' ? '' : 'asc';
+    
             onSortChange(newSorting);
             return newSorting;
         });
     };
+    
 
     const getButtonClass = (criteria) => {
         const direction = sorting[criteria];
@@ -42,9 +41,15 @@ function SortBar({ onSortChange , options}) {
     };
     
     const label = (criteria) => {
-        if (criteria === 'real_profitability') {
-            return 'Profitability';
-        } else {
+        if (criteria === 'rentabilidade_real') {
+            return 'Rentabilidade';
+        } 
+        
+        else if (criteria === 'valorFinal') {
+            return 'Montante Final';
+        }
+
+        else {
             // Adiciona o return aqui para garantir que o valor seja retornado
             return criteria.charAt(0).toUpperCase() + criteria.slice(1);
         }
@@ -52,7 +57,7 @@ function SortBar({ onSortChange , options}) {
 
     return (
         <div className="sort-bar">
-            <p className="texto">Order by:</p>
+            <p className="texto">Ordenar por:</p>
             {Object.keys(sorting).map((criteria) => (
                 <button 
                     key={criteria} 

@@ -47,6 +47,12 @@
   background-color: #075D8A; /* Dark blue background for hover and active state */
 }
 
+.language-button {
+  background-color: transparent;
+  border: transparent;
+  height: 30px;
+}
+
 .wallet-button {
   padding: 10px 20px;
   background-color: #075D8A; /* Button color */

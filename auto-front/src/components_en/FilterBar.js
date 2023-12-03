@@ -69,7 +69,7 @@ function FilterBar({ onFilterChange, options }) {
                     type="search"
                     value={searchTerm}
                     onChange={handleSearchChange}
-                    placeholder="Search for a title"
+                    placeholder="Busque por um título"
                 />
                 <button type="submit" className="search-button">
                     <FontAwesomeIcon icon={faSearch} />

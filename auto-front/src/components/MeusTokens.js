@@ -46,9 +46,17 @@ function MeusTokens() {
         return <MeusTokensEn />;
     }
 
+    const titleStyle = {
+        marginBottom: '0',
+        fontSize: '2em',
+        fontWeight: '200',
+        marginLeft: '5%'
+    }
+
     return (
         <div>
             <Header></Header>
+            <h2 style={titleStyle}>Minha Carteira</h2>
             <SortBar onSortingChange={handleSortChange} options={sorting}></SortBar>
             <FilterBar onFilterChange={handleFilterChange} options={filters}/>
             <Footer></Footer>

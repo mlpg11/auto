@@ -5,7 +5,7 @@ function Footer (){
     const currentYear = new Date().getFullYear();
 
     return (
-        <div className='content'>
+        <div className='footer-content'>
             <p>&copy; {currentYear} Auto Copyright &reg;</p>
         </div>
     );
