@@ -239,29 +239,6 @@ const applySorting = (cards, sorting) => {
     return cards;
 };
 
-const applySortingSimular = (cards, sorting) => {
-    // Implemente a lógica de ordenação aqui
-
-    let chave = '';
-    let order = 0;
-
-    for(const key in sorting){
-        let temp = sorting[key];
-        if(temp!==''){
-            chave = key;
-            if(temp==='desc') order = 1;
-        }
-    }
-
-    if(chave !== '') cards.sort(sortBy(chave));
-
-    if(order){
-        cards.reverse();
-    }
-
-    return cards;
-};
-
 const selectCards = (filters, sorting) => {
     return getCards()
         .then(cards => {
