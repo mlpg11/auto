@@ -13,6 +13,10 @@ completar...
 ### BackEnd
 - Solidity
 - JavaScript
+- Rust
+- Ethers rs
+- Docker
+- Railway
 
 ## Equipe
 - Gustavo Villar Marinatto
