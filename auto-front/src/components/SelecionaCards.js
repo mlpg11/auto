@@ -251,4 +251,4 @@ const selectCards = (filters, sorting) => {
         });
 };
 
-export { applySorting, getCards, selectCards };
+export { applySorting, applyFilters, getCards, selectCards };
