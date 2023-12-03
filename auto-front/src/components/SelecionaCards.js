@@ -219,7 +219,7 @@ const sortBy = (key) => {
 const applySorting = (cards, sorting) => {
     // Implemente a lógica de ordenação aqui
 
-    let chave;
+    let chave = '';
     let order = 0;
 
     for(const key in sorting){
@@ -230,7 +230,7 @@ const applySorting = (cards, sorting) => {
         }
     }
 
-    cards.sort(sortBy(chave));
+    if(chave !== '') cards.sort(sortBy(chave));
 
     if(order){
         cards.reverse();

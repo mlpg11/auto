@@ -15,7 +15,8 @@ function SortBar({ onSortChange , options}) {
                 if(key !== criteria) newSorting[key] = '';
             });
     
-            newSorting[criteria] = newSorting[criteria] === 'asc' ? 'desc' : 'asc';
+            //newSorting[criteria] = newSorting[criteria] === 'asc' ? 'desc' : 'asc';
+            newSorting[criteria] = newSorting[criteria] === 'asc' ? 'desc' : newSorting[criteria] === 'desc' ? '' : 'asc';
     
             onSortChange(newSorting);
             return newSorting;
