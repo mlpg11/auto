@@ -3,7 +3,7 @@ import './Modal.css';
 import graph from './graph.JPG';
 import abi from '../others/abi.json';
 
-const { ethers } = require('ethers');
+const { ethers, formatEther} = require('ethers');
 
 function Comprar({ titulo, token, valorConversaoPublica, valorConversaoSecundario, closeModal }) {
     const [tipoOferta, setTipoOferta] = useState('publica');
@@ -61,23 +61,35 @@ function Comprar({ titulo, token, valorConversaoPublica, valorConversaoSecundari
                 ],
                 "stateMutability": "payable",
                 "type": "function"
-                }
+                },
+                {
+                    "inputs": [
+                      {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                      }
+                    ],
+                    "name": "balanceOf",
+                    "outputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                      }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                  }
             ];
+
             
             const erc20 = new ethers.Contract("0x9A86494Ba45eE1f9EEed9cFC0894f6C5d13a1F0b", contractABI, signer);
             let valorETHs = valorETH.toString();
-            const tx = erc20.comprar({value: ethers.parseEther(valorETHs)});
-            const receipt = await provider.waitForTransaction(tx.hash);
+            await erc20.comprar({value: ethers.parseEther(valorETHs)});
+            //['function balanceOf(address) returns (uint256)']
 
-            console.log(receipt);
-
-            const events = erc20.interface.parseLog(receipt.logs[0]);
-
-            console.log(events);
-
-            let balance = await provider.getBalance("0x9A86494Ba45eE1f9EEed9cFC0894f6C5d13a1F0b")
-
-            console.log(balance);
+            const balance = await erc20.balanceOf("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
         }
         
     };
