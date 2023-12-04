@@ -64,16 +64,22 @@ function Comprar({ titulo, token, valorConversaoPublica, valorConversaoSecundari
                 }
             ];
             
-            // let balance = await provider.getBalance();
             const erc20 = new ethers.Contract("0x9A86494Ba45eE1f9EEed9cFC0894f6C5d13a1F0b", contractABI, signer);
             let valorETHs = valorETH.toString();
             const tx = erc20.comprar({value: ethers.parseEther(valorETHs)});
-            
-            const receipt = provider.getTransactionReceipt(tx.hash);
+            const receipt = await provider.waitForTransaction(tx.hash);
 
-                // const events = erc20.interface.parseLog(receipt.logs[0]);
-                // console.log(events);
+            console.log(receipt);
+
+            const events = erc20.interface.parseLog(receipt.logs[0]);
+
+            console.log(events);
+
+            let balance = await provider.getBalance("0x9A86494Ba45eE1f9EEed9cFC0894f6C5d13a1F0b")
+
+            console.log(balance);
         }
+        
     };
 
     return (
