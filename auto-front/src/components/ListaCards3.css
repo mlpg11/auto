@@ -1,0 +1,9 @@
+.grid-titulos {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(247, 247, 247);
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 10px;
+}

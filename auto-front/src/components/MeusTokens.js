@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FilterBar from './FilterBar';
 import SortBar from './SortBar';
 import Header from './Header';
-import ListaCards from './ListaCards';
+import ListaCards3 from './ListaCards3';
 import { selectCards } from './SelecionaCards';
 import Footer from './Footer';
 import { useLanguage } from '../LanguageContext';
@@ -59,6 +59,7 @@ function MeusTokens() {
             <h2 style={titleStyle}>Minha Carteira</h2>
             <SortBar onSortingChange={handleSortChange} options={sorting}></SortBar>
             <FilterBar onFilterChange={handleFilterChange} options={filters}/>
+            <ListaCards3/>
             <Footer></Footer>
         </div>
     );
