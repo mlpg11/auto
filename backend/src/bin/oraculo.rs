@@ -1,7 +1,6 @@
 use backend::{tasks::atualizar_oraculo, types::EntradaOraculos};
 use ethers::types::Address;
 use reqwest;
-use std::error::Error;
 
 #[derive(serde::Serialize, serde::Deserialize, Debug)]
 struct ApiResponse {

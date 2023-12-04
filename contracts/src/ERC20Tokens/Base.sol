@@ -158,10 +158,14 @@ abstract contract Base is ERC20 {
 
         _burn(msg.sender, quantidadeTokens);
 
+        uint256 lucro = valorResgate - deposito.valor;
+
+        uint256 lucroAposImpostos = aplicarImposto(lucro, idDeposito);
+
+        uint256 proUsuario = deposito.valor + lucroAposImpostos;
+
         // Zera o valor do depósito para indicar que ele foi resgatado.
         deposito.valor = 0;
-
-        uint256 proUsuario = aplicarImposto(valorResgate, idDeposito);
 
         // Transfere o valor do resgate em Ether para a carteira do usuário.
         payable(msg.sender).transfer(proUsuario);
@@ -180,7 +184,7 @@ abstract contract Base is ERC20 {
 
         uint256 impostoDeRenda = getImpostoDeRenda(dias);
 
-        uint256 valorReduzindoImpostoDeRenda = valor - (valor * impostoDeRenda) / PONTOS_BASE;
+        uint256 valorReduzindoImpostoDeRenda = valor - ((valor * impostoDeRenda) / PONTOS_BASE);
 
         uint256 iof = getIof(dias);
 

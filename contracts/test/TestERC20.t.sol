@@ -68,11 +68,5 @@ contract TestERC20 is Test {
         uint256 snapshotAfter = address(USER).balance;
 
         console.log("Usuario resgatou: ", snapshotAfter);
-
-        console2.log("iof 1: %s", base.getIof(1));
-        console2.log("iof 2: %s", base.getIof(2));
-        console2.log("iof 3: %s", base.getIof(3));
-        console2.log("iof 4: %s", base.getIof(4));
-        console2.log("iof 5: %s", base.getIof(5));
     }
 }
