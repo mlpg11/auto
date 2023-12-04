@@ -16,26 +16,35 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .desktop {
     display: none;
   }
   .mobile {
     display: block;
   }
+  /* Ajuste para o botão do menu hambúrguer */
+  .hamburger-menu {
+    display: block;
+    cursor: pointer;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #075D8A;
+    margin-left: 2%; /* Margem esquerda de 2% */
+  }
 }
-
 .nav-links {
   display: flex;
   list-style: none;
-  border-radius: 20px;
   padding-left: 0;
 }
 
 .nav-link {
   padding: 10px 20px;
-  border-radius: 2px;
+  border-radius: 0px;
   font-size: 14px;
+  flex-grow: 1; /* Faz cada item crescer igualmente */
   text-decoration: none; /* Remove underline from links */
   color: #fff; /* White text color */
   background-color: #92a1a8; /* Transparent background for normal state */
@@ -67,3 +76,45 @@
 .wallet-button:hover {
   background-color: #05496e; /* Button color on hover */
 }
+
+@media (max-width: 800px) {
+  /* Esconde os links de navegação */
+  .nav-links {
+    display: none;
+  }
+
+  /* Estilos para o ícone do menu hambúrguer */
+  .hamburger-menu {
+    display: block;
+    cursor: pointer;
+    font-size: 24px; /* Tamanho do ícone do menu */
+    background: none;
+    border: none;
+    margin-right: 2%;
+    color: #075D8A;
+  }
+
+  /* Quando o menu hambúrguer estiver ativo, mostra os links */
+  .nav-links.active {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    top: 70px; 
+    left: 0;
+    background-color: #e8f0f4;
+    width: 100%;
+    min-width: 100%;
+    padding: 10px;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+@media (min-width: 801px) {
+  .hamburger-menu {
+    display: none;
+  }
+}
+

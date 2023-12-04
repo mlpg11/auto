@@ -1,5 +1,5 @@
-import React from 'react';
-import './Header.css';
+import React, { useState } from 'react';
+import '../components/Header.css';
 import logoImage from '../assets/logo.png';
 import iconImage from '../assets/icon.png';
 import { NavLink } from 'react-router-dom';
@@ -25,15 +25,24 @@ function Header() {
     }
   };
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header className="header">
       {/* Logo */}
       <img src={logoImage} alt="Logo" className="logo desktop" />
       <img src={iconImage} alt="Icon" className="logo mobile" />
 
+      {/* So disponivel qnd vh < 800*/}
+      <button onClick={toggleMenu} className="hamburger-menu">☰</button>
+
       {/* Navegação */}
       <nav>
-        <ul className="nav-links">
+        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           <li>
             <NavLink to="/explorar" className="nav-link" activeClassName="active">Explorar</NavLink>
           </li>
@@ -42,6 +51,9 @@ function Header() {
           </li>
           <li>
             <NavLink to="/simular" className="nav-link" activeClassName="active">Simular</NavLink>
+          </li>
+          <li>
+            <NavLink to="/transparencia" className="nav-link" activeClassName="active">Transparência</NavLink>
           </li>
         </ul>
       </nav>
