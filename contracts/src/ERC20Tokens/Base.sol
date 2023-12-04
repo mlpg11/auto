@@ -161,10 +161,32 @@ abstract contract Base is ERC20 {
         // Zera o valor do depósito para indicar que ele foi resgatado.
         deposito.valor = 0;
 
-        // Transfere o valor do resgate em Ether para a carteira do usuário.
-        payable(msg.sender).transfer(valorResgate);
+        uint256 proUsuario = aplicarImposto(valorResgate, idDeposito);
 
-        emit TituloResgatado(nomeToken, quantidadeTokens, valorResgate, msg.sender);
+        // Transfere o valor do resgate em Ether para a carteira do usuário.
+        payable(msg.sender).transfer(proUsuario);
+
+        emit TituloResgatado(nomeToken, quantidadeTokens, proUsuario, msg.sender);
+    }
+
+    function aplicarImposto(uint256 valor, uint256 id) public view returns (uint256) {
+        uint256 unixDeposito = depositos[msg.sender][id].data;
+
+        uint256 dias = (block.timestamp - unixDeposito) / 1 days;
+
+        if (dias == 0) {
+            dias = 1;
+        }
+
+        uint256 impostoDeRenda = getImpostoDeRenda(dias);
+
+        uint256 valorReduzindoImpostoDeRenda = valor - (valor * impostoDeRenda) / PONTOS_BASE;
+
+        uint256 iof = getIof(dias);
+
+        uint256 valorReduzidoDeIof = valorReduzindoImpostoDeRenda - (valorReduzindoImpostoDeRenda * iof) / PONTOS_BASE;
+
+        return valorReduzidoDeIof;
     }
 
     function preverResgate(address usuario, uint256 idDeposito) external view returns (uint256) {
@@ -211,9 +233,9 @@ abstract contract Base is ERC20 {
      */
     function getIof(uint256 day) public pure returns (uint256) {
         // Representado como 3.5 * 10 para evitar decimais
-        uint256 DECREASE_PERCENTAGE = 35; 
+        uint256 DECREASE_PERCENTAGE = 35;
         uint256 DAYS = 30;
-        
+
         if (day >= DAYS) {
             return 0;
         }
