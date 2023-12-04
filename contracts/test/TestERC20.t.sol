@@ -5,6 +5,7 @@ import "forge-std/console.sol";
 import "forge-std/Test.sol";
 import {ERC20} from "solmate/src/mixins/ERC4626.sol";
 import {Base} from "src/ERC20Tokens/Base.sol";
+import {IpcaOraculo} from "src/oraculos/IpcaOraculo.sol";
 
 contract OO is Base {
     constructor(
@@ -17,11 +18,16 @@ contract OO is Base {
     ) Base(_titulo, _nomeToken, _tipo, _vencimento, _rentabilidade, _valorConversao) {}
 }
 
+contract PP is IpcaOraculo {
+    constructor(address _administradorOraculo) IpcaOraculo(_administradorOraculo) {}
+}
+
 contract TestERC20 is Test {
     address internal constant GOV = address(bytes20("GOV"));
     address internal constant USER = address(bytes20("USER"));
 
     Base internal base;
+    IpcaOraculo internal oraculo;
 
     uint256 internal constant PONTOS_BASE = 1e12;
 
@@ -33,11 +39,13 @@ contract TestERC20 is Test {
             "SL26",
             "selic",
             block.timestamp + (365 days * 3),
-            // Rentabilidade 10% a.a
-            10 * 10 ** 12,
+            // Rentabilidade inicial por segundo
+            0.000000003884 * 10 ** 12,
             // Valor de um titulo em ETH
             0.5 * 10 ** 18
         );
+
+        oraculo = new PP(GOV);
 
         deal(address(base), 1_000 ether);
     }
@@ -47,19 +55,22 @@ contract TestERC20 is Test {
 
         vm.startPrank(USER, USER);
 
+        console.log("Usuario depositou: ", address(USER).balance);
+
         base.comprar{value: 0.1 ether}();
 
-        // Asserssertions
-        console.log("Saldo do usuario: ", base.balanceOf(USER));
+        vm.warp(block.timestamp + 1 * 365 days);
 
-        vm.warp(block.timestamp + 365 days);
-
-        uint256 snapshotBefore = address(USER).balance;
+        console.log("Previsao resgate: %s", base.preverResgate(USER, 0));
 
         base.resgatar(0);
 
         uint256 snapshotAfter = address(USER).balance;
 
-        console.log("Difference: ", snapshotAfter - snapshotBefore);
+        console.log("Usuario resgatou: ", snapshotAfter);
+
+        for (uint256 i = 1; i != 31; i++) {
+            console.log("Percetagem: %s | %s", i, base.getIof(i));
+        }
     }
 }
