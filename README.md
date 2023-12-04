@@ -17,6 +17,7 @@ completar...
 - Ethers rs
 - Docker
 - Railway
+- Foundry (Forge, Anvil e Cast)
 
 ## Equipe
 - Gustavo Villar Marinatto
