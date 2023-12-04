@@ -34,7 +34,7 @@ abstract contract Base is ERC20 {
     /// @notice UNIX
     uint256 public vencimento;
 
-    /// @notice 12,25% = 12.15 * 10 ** 18
+    /// @notice 12,25% = 12.15 * 10 ** 12
     uint256 public rentabilidade;
 
     /// @notice Quanto de ETHEREUM compra 1 token no publico
@@ -44,6 +44,15 @@ abstract contract Base is ERC20 {
     uint256 public rentabilidadeAcumulada;
 
     uint8 public constant DECIMALS = 18;
+
+    uint256 private constant PONTOS_BASE = 1e12;
+
+    /**
+     * Successfully created new keypair.
+     * Address:     0xf4E69602F80D1D29b9aa37f70a5E3e9E48C2A67b
+     * Private key: 0x1eaad7767b9980e9c19df80d8c38248a8738a978ce34d0d293720a7704cd374b
+     */
+    address public constant RECEBEDOR_IMPOSTO = 0xf4E69602F80D1D29b9aa37f70a5E3e9E48C2A67b;
 
     /// @notice Usuario => Nonce => Quando e quanto depositou
     mapping(address => mapping(uint256 => Deposito)) public depositos;
@@ -59,6 +68,8 @@ abstract contract Base is ERC20 {
 
     event TrocaCriada(uint256 trocaId, uint256 quantidadeTitulos, uint256 quantidadeEthereum, address criadorDaTroca);
     event TrocaAceita(uint256 trocaId, uint256 quantidadeTitulos, uint256 quantidadeEthereum, address criadorDaTroca);
+    event TituloComprado(string nomeToken, uint256 quantidadeTitulos, uint256 quantidadeEthereum, address comprador);
+    event TituloResgatado(string nomeToken, uint256 quantidadeTitulos, uint256 quantidadeEthereum, address comprador);
 
     /*//////////////////////////////////////////////////////////////
                             CONSTRUCTOR
@@ -104,6 +115,8 @@ abstract contract Base is ERC20 {
     function comprar() external payable returns (uint256) {
         atualizaRentabilidade();
 
+        // TODO: Tem que verificar se ainda esta vendendo
+
         require(msg.value > 0, "Valor deve ser maior que 0");
 
         uint256 quantidadeTitulos = (msg.value * 10 ** DECIMALS) / valorConversao;
@@ -115,9 +128,15 @@ abstract contract Base is ERC20 {
 
         _mint(msg.sender, quantidadeTitulos);
 
+        emit TituloComprado(nomeToken, quantidadeTitulos, msg.value, msg.sender);
+
         return quantidadeTitulos;
     }
 
+    /**
+     * @notice Resgata o valor em ETHEREUM e queima a quantidade de titulos
+     * @param idDeposito ID do deposito que deseja resgatar
+     */
     function resgatar(uint256 idDeposito) external {
         // Recupera o depósito do usuário com base no ID fornecido.
         Deposito storage deposito = depositos[msg.sender][idDeposito];
@@ -132,7 +151,7 @@ abstract contract Base is ERC20 {
 
         // Calcula o valor total do resgate em Ethereum.
         // Refatorar pra acertar decimais
-        uint256 valorResgate = deposito.valor + (deposito.valor * rentabilidadeDoDeposito / 10 ** DECIMALS);
+        uint256 valorResgate = deposito.valor * (PONTOS_BASE + rentabilidadeDoDeposito) / PONTOS_BASE;
 
         // Queima os tokens correspondentes ao valor do depósito.
         uint256 quantidadeTokens = deposito.quantidadeTitulos;
@@ -144,6 +163,67 @@ abstract contract Base is ERC20 {
 
         // Transfere o valor do resgate em Ether para a carteira do usuário.
         payable(msg.sender).transfer(valorResgate);
+
+        emit TituloResgatado(nomeToken, quantidadeTokens, valorResgate, msg.sender);
+    }
+
+    function preverResgate(address usuario, uint256 idDeposito) external view returns (uint256) {
+        // Recupera o depósito do usuário com base no ID fornecido.
+        Deposito storage deposito = depositos[usuario][idDeposito];
+
+        require(deposito.valor > 0, "Deposito nao encontrado");
+
+        uint256 tempoDesdeUltimaAtualizacao = block.timestamp - ultimaAtualizacao;
+
+        // A rentabilidade acumulada eh a rentabilidade * o tempo desde a ultima atualizacao
+        // Exemplo: se era 10% a rentabilidade e durou 600 segundos, seria 10 * 600
+        uint256 rentabilidadeAcumulada_ = rentabilidade + (rentabilidade * tempoDesdeUltimaAtualizacao);
+
+        // Calcula a rentabilidade específica deste depósito.
+        uint256 rentabilidadeDoDeposito = rentabilidadeAcumulada_ - deposito.rentabilidadeNoMomentoDoDeposito;
+
+        // Calcula o valor total do resgate em Ethereum.
+        // Refatorar pra acertar decimais
+        uint256 valorResgate = deposito.valor * (PONTOS_BASE + rentabilidadeDoDeposito) / PONTOS_BASE;
+
+        return valorResgate;
+    }
+
+    /**
+     * @notice Retorna o valor do imposto de renda de acordo com quanto tempo o deposito do usuario foi depositado
+     * @param dias Quantidade de dias que o usuario quer prever
+     */
+    function getImpostoDeRenda(uint256 dias) public pure returns (uint256) {
+        if (dias <= 180 days) {
+            return (225 * PONTOS_BASE) / 1000;
+        } else if (dias > 180 days && dias < 360 days) {
+            return (200 * PONTOS_BASE) / 1000;
+        } else if (dias >= 360 days && dias < 720 days) {
+            return (175 * PONTOS_BASE) / 1000;
+        } else {
+            return (150 * PONTOS_BASE) / 1000;
+        }
+    }
+
+    /**
+     * @notice Retorna o valor do IOF de acordo com o dia
+     * @param day Dia que deseja prever o IOF
+     */
+    function getIof(uint256 day) public pure returns (uint256) {
+        // Representado como 3.5 * 10 para evitar decimais
+        uint256 DECREASE_PERCENTAGE = 35; 
+        uint256 DAYS = 30;
+        
+        if (day >= DAYS) {
+            return 0;
+        }
+        uint256 value = PONTOS_BASE;
+
+        for (uint256 i = 0; i < day; i++) {
+            value -= (value * DECREASE_PERCENTAGE) / 1000; // Dividindo por 1000 para compensar a multiplicação por 10
+        }
+
+        return value;
     }
 
     function criarTroca(uint256 _quantidadeTokens, uint256 _quantidadeEthereum) external {
