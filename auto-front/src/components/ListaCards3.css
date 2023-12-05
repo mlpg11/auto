@@ -6,4 +6,19 @@
     padding-top: 10px;
     padding-bottom: 10px;
     gap: 10px;
+    height: 70%;
+    min-height: 70vh;
+}
+
+.vazio  {
+    display: flex;
+    margin-top: 15px;
+    flex-direction: column;
+    height: 25%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    width: 90%;
+    background-color: white;
+    padding-bottom: 15px;
 }

@@ -1,3 +1,118 @@
+import { ethers } from 'ethers';
+
+const tokenContractAddresses = [ 
+    '0xEC7cb8C3EBE77BA6d284F13296bb1372A8522c5F',
+    '0x3C2BafebbB0c8c58f39A976e725cD20D611d01e9',
+    '0x5f246ADDCF057E0f778CD422e20e413be70f9a0c',
+    '0xaD82Ecf79e232B0391C5479C7f632aA1EA701Ed1',
+    '0x4Dd5336F3C0D70893A7a86c6aEBe9B953E87c891',
+    '0x91A1EeE63f300B8f41AE6AF67eDEa2e2ed8c3f79',
+    '0xBe6Eb4ACB499f992ba2DaC7CAD59d56DA9e0D823',
+    '0x54287AaB4D98eA51a3B1FBceE56dAf27E04a56A6',
+    '0xE401FBb0d6828e9f25481efDc9dd18Da9E500983',
+    '0xb6aA91E8904d691a10372706e57aE1b390D26353'
+]
+
+const tokenAbi = [
+    {
+        "inputs": [],
+        "name": "comprar",
+        "outputs": [
+            {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+            }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+            }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+            {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "titulo",
+        "outputs": [
+            {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "stateMutability": "view",
+        "type": "function",
+        "name": "tipo",
+        "outputs": [
+            {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+            }
+        ]
+    },
+    {
+        "inputs": [],
+        "stateMutability": "view",
+        "type": "function",
+        "name": "vencimento",
+        "outputs": [
+            {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+            }
+        ]
+    },
+    {
+        "inputs": [],
+        "name": "nomeToken",
+        "outputs": [
+            {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "rentabilidade",
+        "outputs": [
+            {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+];
+
 const getCards = async () => {
     const cards = [
         {
@@ -20,7 +135,7 @@ const getCards = async () => {
             rentabilidade_real: '11.24',
             vencimento: '15/05/2029',
             risco: 'Baixo',
-            nomeToken: 'IP29',
+            nomeToken: 'IPCA29',
             valorConversaoPublica: '0.31',
             valorSimulacao: 0
         },
@@ -56,7 +171,7 @@ const getCards = async () => {
             rentabilidade_real: '11.53',
             vencimento: '15/05/2045',
             risco: 'Médio',
-            nomeToken: 'IP45',
+            nomeToken: 'IPCA45',
             valorConversaoPublica: '0.12',
             valorSimulacao: 0
         },
@@ -65,10 +180,10 @@ const getCards = async () => {
             titulo: 'TESOURO IPCA+ 2035',
             tipo: 'ipca+',
             rentabilidade: 'IPCA + 5,62%',
-            rentabilidade_real: '11.4',
+            rentabilidade_real: '11.40',
             vencimento: '15/05/2035',
             risco: 'Médio',
-            nomeToken: 'IP35',
+            nomeToken: 'IPCA35',
             valorConversaoPublica: '0.22',
             valorSimulacao: 0
         },
@@ -80,7 +195,7 @@ const getCards = async () => {
             rentabilidade_real: '11.47',
             vencimento: '15/12/2049',
             risco: 'Médio',
-            nomeToken: 'RM30',
+            nomeToken: 'RENDA30',
             valorConversaoPublica: '0.18',
             valorSimulacao: 0
         },
@@ -92,7 +207,7 @@ const getCards = async () => {
             rentabilidade_real: '11.53',
             vencimento: '15/12/2054',
             risco: 'Médio',
-            nomeToken: 'RM35',
+            nomeToken: 'RENDA35',
             valorConversaoPublica: '0.13',
             valorSimulacao: 0
         },
@@ -104,7 +219,7 @@ const getCards = async () => {
             rentabilidade_real: '11.55',
             vencimento: '15/12/2059',
             risco: 'Médio',
-            nomeToken: 'RM40',
+            nomeToken: 'RENDA40',
             valorConversaoPublica: '0.10',
             valorSimulacao: 0
         },
@@ -124,14 +239,6 @@ const getCards = async () => {
     return cards;
 };
 
-
-// TODO DEFINIR UM RENTABILIDADE REAL OCULTO NO CARD
-/*
-    cards {int id, string titulo, int tipo, string rentabilidade, string vencimento, string risco}
-    filters {bool tesouroSelic, bool tesouroPrefixado, bool tesouroIPCA, bool tesouroRenda,, string searchTerm}
-
-    vc pode usar console.log(cards ou filters) pra testar
-*/
 const applyFilters = (cards, filters) => {
     // Implemente a lógica de filtragem aqui
 
@@ -171,6 +278,58 @@ const applyFilters = (cards, filters) => {
 
     if(filters.tesouroRenda){
         allCards = allCards.concat(rendaCards);
+    }
+
+    return allCards;
+};
+
+const applyFilters2 = (cards, filters) => {
+    // Implemente a lógica de filtragem aqui
+
+    let tituloComprado = [];
+    let tituloResgatado = [];
+    let trocaCriada = [];
+    let trocaAceita = [];
+    let transfers = [];
+
+    for(const card of cards){
+        if(card['tipo']==='TituloComprado'){
+            tituloComprado.push(card);
+        }
+        if(card['tipo']==='TituloResgatado'){
+            tituloResgatado.push(card);
+        }
+        if(card['tipo']==='TrocaCriada'){
+            trocaCriada.push(card);
+        }
+        if(card['tipo']==='TrocaAceita'){
+            trocaAceita.push(card);
+        }
+        if(card['tipo']==='Transfer'){
+            transfers.push(card);
+        }
+    }
+
+    let allCards = [];
+
+    if(filters.tituloComprado){
+        allCards = allCards.concat(tituloComprado);
+    }
+
+    if(filters.tituloResgatado){
+        allCards = allCards.concat(tituloResgatado);
+    }
+
+    if(filters.trocaCriada){
+        allCards = allCards.concat(trocaCriada);
+    }
+
+    if(filters.trocaAceita){
+        allCards = allCards.concat(trocaAceita);
+    }
+
+    if(filters.transferencia){
+        allCards = allCards.concat(transfers);
     }
 
     return allCards;
@@ -251,4 +410,67 @@ const selectCards = (filters, sorting) => {
         });
 };
 
-export { applySorting, applyFilters, getCards, selectCards };
+const getMeusCards = async (wallet) => {
+    if (typeof window.ethereum !== 'undefined') {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const cards = [];
+    
+        for (const address of tokenContractAddresses) {
+            const contract = new ethers.Contract(address, tokenAbi, signer);
+            
+            // Usamos o método balanceOf para obter o saldo do endereço da carteira
+            const balance = await contract.balanceOf(wallet);
+            
+            if (!(balance == 0)) {
+                const titulo = await contract.titulo();
+                const tipo = await contract.tipo();
+                const vencimentoTimestamp = await contract.vencimento();
+                const nomeToken = await contract.nomeToken();
+                const rentabilidade = await contract.rentabilidade();
+
+                // Convertendo a quantia para Ether
+                const quantia = ethers.formatUnits(balance, 18);
+
+                // Convertendo o timestamp Unix para a data no formato "aaaa"
+                const vencimentoDate = new Date(Number(vencimentoTimestamp) * 1000);
+                const vencimentoFormatted = vencimentoDate.getFullYear();
+
+                let rentabilidadeFormatted = Number(rentabilidade)/(10**22);
+                rentabilidadeFormatted *= (10**12);
+                rentabilidadeFormatted *= 31536000;
+                
+                cards.push({
+                    address,
+                    nomeTitulo: titulo,
+                    tipo: tipo,
+                    vencimento: vencimentoFormatted,
+                    nomeToken,
+                    rentabilidade: rentabilidadeFormatted, // Ajustar se necessário
+                    quantia: quantia,
+                });
+            }
+        }
+        console.log(cards);
+        return cards;
+    } 
+    
+    else {
+        console.log('MetaMask is not installed');
+        return [];
+    }
+};
+
+const selectMeusCards = async (wallet, sorting, filters) => {
+    return getMeusCards(wallet)
+        .then(cards => {
+            console.log(cards);
+            let filteredCards = applyFilters(cards, filters);
+            return filteredCards;
+        })
+        .catch(error => {
+            console.error("Erro ao selecionar cards:", error);
+            return []; // Retorne um array vazio em caso de erro
+        });
+};
+export { applySorting, applyFilters, getCards, selectCards, getMeusCards, tokenContractAddresses, applyFilters2};

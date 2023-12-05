@@ -11,6 +11,65 @@
     width: 90%;
 }
 
+.mt-row2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    padding: 10px 20px;
+    padding-left: 0;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border: 1px solid rgb(193, 186, 176); /* Adiciona a borda */
+    width: 90%;
+}
+
+.mt-row-element2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Isto irá centralizar os itens no eixo cruzado */
+    justify-content: center; /* Adiciona centralização ao longo do eixo principal para colunas */
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+#mt1{
+    width: 15%;
+    max-width: 15%;
+}
+#mt2{
+    width: 10%;
+    max-width: 10%;
+}
+#mt3{
+    width: 10%;
+    max-width: 10%;
+}
+#mt4{
+    width: 15%;
+    max-width: 15%;
+}
+#mt5{
+    width: 15%;
+    max-width: 15%;
+}
+#mt6{
+    width: 20%;
+    max-width: 20%;
+    white-space: nowrap; /* Impede que o texto quebre em múltiplas linhas */
+  overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse a largura da div */
+  text-overflow: ellipsis; /* Adiciona reticências (...) ao invés de mostrar o texto que ultrapassa a div */
+    
+}
+#mt7{
+    width: 20%;
+    max-width: 20%;
+    white-space: nowrap; /* Impede que o texto quebre em múltiplas linhas */
+    overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse a largura da div */
+    text-overflow: ellipsis; /* Adiciona reticências (...) ao invés de mostrar o texto que ultrapassa a div */
+}
+
+
 .mt-row-element {
     display: flex;
     flex-direction: column;
@@ -52,11 +111,12 @@
 .mt-row-element:nth-child(2) {
     margin-left: 0; /* Remove a margem direita do primeiro elemento */
     justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+    width: 20%;
 }
 
 .borda {
     width: 15px; /* Ajuste a largura da borda colorida conforme necessário */
-    height: 123%; /* Ajuste a altura para corresponder à altura do elemento pai */
+    height: 120%; /* Ajuste a altura para corresponder à altura do elemento pai */
     border-radius: 10px 0 0 10px; /* Ajuste para bordas arredondadas somente no lado esquerdo */
     margin-right: 10px; /* Ajuste a distância entre a borda e o primeiro elemento do título */
 }
@@ -85,4 +145,40 @@
 }
 .outros1 { 
     background-image: linear-gradient(to bottom, #122d5f, #0f234c); 
+}
+
+#aa1 {
+    width: 15%;
+    max-width: 15%;
+}
+
+#aa2 {
+    width: 10%;
+    max-width: 10%;
+}
+
+#aa3 {
+    width: 10%;
+    max-width: 10%;
+}
+
+#aa4 {
+    width: 15%;
+    max-width: 15%;
+}
+
+#aa5 {
+    width: 10%;
+    max-width: 10%;
+}
+
+#aa6 {
+    width: 15%;
+    max-width: 15%;
+}
+
+.overflow {
+    white-space: nowrap; /* Impede que o texto quebre em múltiplas linhas */
+    overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse a largura da div */
+    text-overflow: ellipsis; /* Adiciona reticências (...) ao invés de mostrar o texto que ultrapassa a div */
 }
