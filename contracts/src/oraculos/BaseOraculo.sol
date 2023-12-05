@@ -6,12 +6,16 @@ abstract contract BaseOraculo {
 
     uint256 public ultimoValor;
 
+    uint256 public ultimoUpdate;
+
     constructor(address _administradorOraculo) {
         autorizado[_administradorOraculo] = true;
     }
 
     function setarValor(uint256 _valor) external somenteAutorizado {
         ultimoValor = _valor;
+
+        ultimoUpdate = block.timestamp;
     }
 
     modifier somenteAutorizado() {

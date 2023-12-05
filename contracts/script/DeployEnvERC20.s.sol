@@ -41,16 +41,16 @@ contract DeployEnvERC20 is Script {
         renda40 = new RENDA40();
         sl29 = new SL29();
 
-        address(payable(sl26)).call{value: 100 ether}("");
-        address(payable(pf29)).call{value: 100 ether}("");
-        address(payable(ipca29)).call{value: 100 ether}("");
-        address(payable(ipca35)).call{value: 100 ether}("");
-        address(payable(ipca45)).call{value: 100 ether}("");
-        address(payable(pf26)).call{value: 100 ether}("");
-        address(payable(renda30)).call{value: 100 ether}("");
-        address(payable(renda35)).call{value: 100 ether}("");
-        address(payable(renda40)).call{value: 100 ether}("");
-        address(payable(sl29)).call{value: 100 ether}("");
+        address(payable(sl26)).call{value: 50 ether}("");
+        address(payable(pf29)).call{value: 50 ether}("");
+        address(payable(ipca29)).call{value: 50 ether}("");
+        address(payable(ipca35)).call{value: 50 ether}("");
+        address(payable(ipca45)).call{value: 50 ether}("");
+        address(payable(pf26)).call{value: 50 ether}("");
+        address(payable(renda30)).call{value: 50 ether}("");
+        address(payable(renda35)).call{value: 50 ether}("");
+        address(payable(renda40)).call{value: 50 ether}("");
+        address(payable(sl29)).call{value: 50 ether}("");
 
         console2.log("SL26: ", address(sl26));
         console2.log("PF29: ", address(pf29));

@@ -18,9 +18,9 @@ const BASE: u128 = 1e12 as u128;
 async fn main() -> eyre::Result<()> {
     let addresses = [
         // IPCA
-        "0x0B32a3F8f5b7E5d315b9E52E640a49A89d89c820".parse::<Address>()?,
+        "0x90E75f390332356426B60FB440DF23f860F6A113".parse::<Address>()?,
         // Taxa de juros
-        "0xF357118EBd576f3C812c7875B1A1651a7f140E9C".parse::<Address>()?,
+        "0x59c7D03d2E9893FB7bAa89dA50a9452e1e9B8b90".parse::<Address>()?,
     ];
 
     let mut new_values: Vec<ethers::types::U256> = vec![];
