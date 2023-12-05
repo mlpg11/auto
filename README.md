@@ -26,9 +26,9 @@ https://github.com/mlpg11/auto/tree/main/contracts/src/ERC20Tokens
 
 ## Oraculos
 
-### Parte de solidity: https://github.com/mlpg11/auto/tree/main/contracts/src/oraculos
+### Parte de Solidity: https://github.com/mlpg11/auto/tree/main/contracts/src/oraculos
 
-### Automação em rust: https://github.com/mlpg11/auto/blob/main/backend/src/bin/oraculo.rs
+### Automação em Rust: https://github.com/mlpg11/auto/blob/main/backend/src/bin/oraculo.rs
 
 ## Equipe
 - Gustavo Villar Marinatto
