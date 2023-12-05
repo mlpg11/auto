@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './Modal.css'; 
 import { useMetaMaskAccount } from '../MeusTokens';
 import { tokenContractAddresses } from './Comprar'
-const { ethers, formatEther} = require('ethers');
+const { ethers } = require('ethers');
 
-function Resgatar({ titulo, token, quantia, rentabilidade, closeModal }) {
+function Resgatar({ titulo, token, quantia, rentabilidade, closeModal}) {
     const [quantiaETH, setQuantiaETH] = useState(null);
     
-    const wallet = useMetaMaskAccount();
     
+    let wallet = useMetaMaskAccount();
+
     useEffect(() => {
         carregarDados();
     }, [token, quantia]);
@@ -122,7 +123,45 @@ function Resgatar({ titulo, token, quantia, rentabilidade, closeModal }) {
                     ],
                     "stateMutability": "view",
                     "type": "function"
-                }
+                },
+                {
+                    "inputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "dias",
+                        "type": "uint256"
+                      }
+                    ],
+                    "name": "getImpostoDeRenda",
+                    "outputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                      }
+                    ],
+                    "stateMutability": "pure",
+                    "type": "function"
+                  },
+                  {
+                    "inputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "day",
+                        "type": "uint256"
+                      }
+                    ],
+                    "name": "getIof",
+                    "outputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                      }
+                    ],
+                    "stateMutability": "pure",
+                    "type": "function"
+                  }
             ];
 
             const erc20 = new ethers.Contract(tokenContractAddresses[token], contractABI, signer);

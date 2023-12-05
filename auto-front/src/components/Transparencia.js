@@ -185,7 +185,6 @@ const returnLog = async () => {
         }
 
     }
-
     console.log(cards);
     return cards;
 
@@ -194,6 +193,7 @@ const returnLog = async () => {
 function Transparencia() {
     const { isEnglish } = useLanguage();
     const [currentCards, setCurrentCards] = useState([]);
+    const [defaultCards, setDefaultCards] = useState([]);
 
     const [filters, setFilters] = useState({
         tituloComprado: true,
@@ -207,11 +207,17 @@ function Transparencia() {
         setFilters(newFilters);
     };
     
+    //applyFilters2(cards, filters)
+
+    useEffect(() => {
+        setCurrentCards(applyFilters2(defaultCards, filters));
+    }, [filters]);
+    
     useEffect(() => {
         returnLog().then(cards => {
-            setCurrentCards(applyFilters2(cards));
+            setDefaultCards(cards);
         });
-    }, []);     
+    }, []);
 
     const titleStyle = {
         marginBottom: '2%',
