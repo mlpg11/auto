@@ -1,0 +1,52 @@
+.not-found {
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Isso vai centralizar todos os filhos da div .not-found horizontalmente */
+    padding-top: 38px;
+    padding-bottom: 10vh;
+}
+
+#logo {
+    display: flex;
+    justify-content: center;
+    padding-top: 10vh;
+    height: 5vh;
+}
+
+#image {
+    display: flex;
+    flex-direction: column; /* Alinha os elementos em uma coluna */
+    justify-content: center;
+    align-items: center; /* Centraliza os elementos horizontalmente */
+}
+
+#404 {
+    font-weight: bolder;
+    font-size: 5em; /* Reduz o tamanho para ser mais apropriado */
+    margin: 0;
+}
+
+.not-found h1 {
+    margin-bottom: 10px;
+}
+
+.not-found p {
+    font-size: 18px;
+    color: #666;
+}
+
+#nav {
+    margin-top: 20px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    background-color: #075D8A;
+}
+
+#nav:hover {
+    background-color: #05496e;
+}
