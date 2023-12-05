@@ -1,8 +1,8 @@
 import { ethers } from 'ethers';
 
 const tokenContractAddresses = [ 
-    '0xEC7cb8C3EBE77BA6d284F13296bb1372A8522c5F',
-    '0x3C2BafebbB0c8c58f39A976e725cD20D611d01e9',
+    '0x10537D7bD661C9c34F547b38EC662D6FD482Ae95',
+    '0x8Aed6FE10dF3d6d981B101496C9c7245AE65cAEc',
     '0x5f246ADDCF057E0f778CD422e20e413be70f9a0c',
     '0xaD82Ecf79e232B0391C5479C7f632aA1EA701Ed1',
     '0x4Dd5336F3C0D70893A7a86c6aEBe9B953E87c891',
@@ -412,6 +412,7 @@ const selectCards = (filters, sorting) => {
 
 const getMeusCards = async (wallet) => {
     if (typeof window.ethereum !== 'undefined') {
+        console.log(wallet);
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const cards = [];
