@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import './Card.css';
-import Detalhes from './Modals/Detalhes';
-import Comprar from './Modals/Comprar';
+import { Comprar } from './Modals/Comprar';
 
 Modal.setAppElement('#root');
 
 function Card({ id, titulo, tipo, rentabilidade, rentabilidade_real, vencimento, risco, nomeToken, valorConversaoPublica, valorFinal, totalInvestido, ganho}) {
-    const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
     const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
 
     // Funções para abrir cada modal
-    const openDetailsModal = () => setIsDetailsModalOpen(true);
     const openBuyModal = () => setIsBuyModalOpen(true);
-
-    // Funções para fechar cada modal
-    const closeDetailsModal = () => setIsDetailsModalOpen(false);
     const closeBuyModal = () => setIsBuyModalOpen(false);
 
     const getTipoClass = (tipo) => {
@@ -60,6 +54,7 @@ function Card({ id, titulo, tipo, rentabilidade, rentabilidade_real, vencimento,
                 </div>
                 
                 <div className="card-footer">
+                    <a href="https://www.tesourodireto.com.br/titulos/tipos-de-tesouro.htm" target="_blank"><button className="fileira1-button">Detalhes</button></a>
                     <button onClick={openBuyModal} className={`comprar-button ${getTipoClass(tipo)}`}>Comprar</button>
                 </div>
 
@@ -104,20 +99,9 @@ function Card({ id, titulo, tipo, rentabilidade, rentabilidade_real, vencimento,
             </div>
             
             <div className="card-footer">
-                <button onClick={openDetailsModal} className="fileira1-button">Detalhes</button>
-                
+                <a href="https://www.tesourodireto.com.br/titulos/tipos-de-tesouro.htm" target="_blank"><button href="https://www.tesourodireto.com.br/titulos/tipos-de-tesouro.htm" target="_blank" className="fileira1-button">Detalhes</button></a>
                 <button onClick={openBuyModal} className={`comprar-button ${getTipoClass(tipo)}`}>Comprar</button>
             </div>
-
-            {/* Modal de Detalhes */}
-            <Modal 
-                isOpen={isDetailsModalOpen} 
-                onRequestClose={closeDetailsModal}
-                className="modal-content"
-                overlayClassName="modal-overlay"
-            >
-                <Detalhes closeModal={closeDetailsModal}></Detalhes>
-            </Modal>
 
             {/* Modal de Comprar */}
             <Modal 

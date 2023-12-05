@@ -57,18 +57,18 @@ function Header() {
           </li>
         </ul>
       </nav>
-      
+
       {/* Botão de Tradução */}
       <div className='lbdiv'>
         <button onClick={toggleLanguage} className="language-button">
           <img className='language-button'
-            src={isEnglish ? en : pt} 
+            src={isEnglish ? pt : en} 
             alt={isEnglish ? "Switch to Portuguese" : "Switch to English"} 
           />
         </button>
-        <p>{isEnglish ? "English" : "Português"}</p>
+        <p>{isEnglish ? "Português" : "English"}</p>
       </div>
-
+      
       {/* Botão de Conectar Carteira */}
       <button onClick={connectWalletHandler} className="wallet-button">
         {connected ? 'Conectado' : 'Conectar Carteira'}

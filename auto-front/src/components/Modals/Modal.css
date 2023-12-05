@@ -103,3 +103,16 @@
 .purple-text {
     color:blueviolet;
 }
+
+#modal-titulo {
+    margin-top: 0;
+}
+
+#modal-label {
+    font-size: medium;
+}
+
+.mlabel2 {
+    margin-bottom: 0;
+    font-size: small;
+}
