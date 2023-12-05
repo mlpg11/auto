@@ -21,12 +21,12 @@ function NotFound() {
             <div className="not-found">
                 <div id="image">
                     <FontAwesomeIcon icon={faExclamationTriangle} size="3x" />
-                    <h1 id="404">Erro 404</h1>
+                    <h1 id="404">Error 404</h1>
                 </div>
                 
-                <h1>Página Não Encontrada</h1>
-                <p>Desculpe, a página que você está procurando não existe.</p>
-                <NavLink id="nav" to="/">Voltar ao Início</NavLink>
+                <h1>Page Not Found</h1>
+                <p>Sorry, page you are looking for doesn't exists.</p>
+                <NavLink id="nav" to="/">Back to Home</NavLink>
             </div>
         </div>
     );

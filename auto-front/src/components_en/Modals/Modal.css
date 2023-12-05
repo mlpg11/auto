@@ -60,6 +60,9 @@
 
 .inputs {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -68,6 +71,7 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 30%;
 }
 
 .modal-buttons {
@@ -102,4 +106,17 @@
 
 .purple-text {
     color:blueviolet;
+}
+
+#modal-titulo {
+    margin-top: 0;
+}
+
+#modal-label {
+    font-size: medium;
+}
+
+.mlabel2 {
+    margin-bottom: 0;
+    font-size: small;
 }

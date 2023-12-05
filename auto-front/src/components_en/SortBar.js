@@ -42,11 +42,23 @@ function SortBar({ onSortChange , options}) {
     
     const label = (criteria) => {
         if (criteria === 'rentabilidade_real') {
-            return 'Rentabilidade';
+            return 'Profitability';
         } 
         
         else if (criteria === 'valorFinal') {
-            return 'Montante Final';
+            return 'Final Amount';
+        }
+
+        else if (criteria === 'titulo'){
+            return 'Title';
+        }
+
+        else if (criteria === 'risco'){
+            return 'Risk';
+        }
+
+        else if (criteria === 'vencimento'){
+            return 'Due';
         }
 
         else {
@@ -57,7 +69,7 @@ function SortBar({ onSortChange , options}) {
 
     return (
         <div className="sort-bar">
-            <p className="texto">Ordenar por:</p>
+            <p className="texto">Order by:</p>
             {Object.keys(sorting).map((criteria) => (
                 <button 
                     key={criteria} 

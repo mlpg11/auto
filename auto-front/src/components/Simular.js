@@ -7,6 +7,7 @@ import { applySorting, applyFilters, getCards } from './SelecionaCards';
 import Footer from './Footer';
 import { useLanguage } from '../LanguageContext';
 import Poupanca from './Poupanca';
+import SimularEn from '../components_en/Simular'
 
 function Simular() {
     const { isEnglish } = useLanguage();
@@ -119,6 +120,12 @@ function Simular() {
         fontSize: '2em',
         fontWeight: '200',
         marginLeft: '5%'
+    }
+
+    if(isEnglish) {
+        return(
+            <SimularEn/>
+        )
     }
     return (
         <div>

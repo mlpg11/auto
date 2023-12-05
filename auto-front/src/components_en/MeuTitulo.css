@@ -1,0 +1,184 @@
+.mt-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    padding: 10px 20px;
+    padding-left: 0;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border: 1px solid rgb(193, 186, 176); /* Adiciona a borda */
+    width: 90%;
+}
+
+.mt-row2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    padding: 10px 20px;
+    padding-left: 0;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border: 1px solid rgb(193, 186, 176); /* Adiciona a borda */
+    width: 90%;
+}
+
+.mt-row-element2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Isto irá centralizar os itens no eixo cruzado */
+    justify-content: center; /* Adiciona centralização ao longo do eixo principal para colunas */
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+#mt1{
+    width: 15%;
+    max-width: 15%;
+}
+#mt2{
+    width: 10%;
+    max-width: 10%;
+}
+#mt3{
+    width: 10%;
+    max-width: 10%;
+}
+#mt4{
+    width: 15%;
+    max-width: 15%;
+}
+#mt5{
+    width: 15%;
+    max-width: 15%;
+}
+#mt6{
+    width: 20%;
+    max-width: 20%;
+    white-space: nowrap; /* Impede que o texto quebre em múltiplas linhas */
+  overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse a largura da div */
+  text-overflow: ellipsis; /* Adiciona reticências (...) ao invés de mostrar o texto que ultrapassa a div */
+    
+}
+#mt7{
+    width: 20%;
+    max-width: 20%;
+    white-space: nowrap; /* Impede que o texto quebre em múltiplas linhas */
+    overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse a largura da div */
+    text-overflow: ellipsis; /* Adiciona reticências (...) ao invés de mostrar o texto que ultrapassa a div */
+}
+
+
+.mt-row-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Isto irá centralizar os itens no eixo cruzado */
+    justify-content: center; /* Adiciona centralização ao longo do eixo principal para colunas */
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+/* Adicione estilos para centralizar os botões dentro do .mt-row-element que os contém */
+.mt-row-element button {
+    margin-top: auto; /* Empurra os botões para o centro/cima se necessário */
+    margin-bottom: auto; /* Empurra os botões para o centro/baixo se necessário */
+    margin-left: 10px;
+}
+
+
+.h-spacer {
+    width: 1px;
+    background-color: rgb(193, 186, 176);
+}
+
+.mt-label {
+    font-weight: bold; /* Torna o texto em negrito */
+    font-size: small;
+    margin-bottom: 5px; /* Espaçamento abaixo do label */
+    color: #333; /* Cor do texto, ajuste conforme necessário */
+}
+
+#first {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 11px;
+    max-width: 20px;
+}
+
+.mt-row-element:nth-child(2) {
+    margin-left: 0; /* Remove a margem direita do primeiro elemento */
+    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+    width: 20%;
+}
+
+.borda {
+    width: 15px; /* Ajuste a largura da borda colorida conforme necessário */
+    height: 120%; /* Ajuste a altura para corresponder à altura do elemento pai */
+    border-radius: 10px 0 0 10px; /* Ajuste para bordas arredondadas somente no lado esquerdo */
+    margin-right: 10px; /* Ajuste a distância entre a borda e o primeiro elemento do título */
+}
+
+
+.mtbutton {
+    color: white;
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    padding: 6px 10px;
+}
+
+
+.selic1 { 
+    background-image: linear-gradient(to bottom, #139F7B, #0f7f62); 
+}
+.prefixado1 { 
+    background-image: linear-gradient(to bottom, #0FA291, #0d8274); 
+}
+.ipca1 { 
+    background-image: linear-gradient(to bottom, #0986AA, #076a88); 
+}
+.renda1 { 
+    background-image: linear-gradient(to bottom, #144D88, #103b6b); 
+}
+.outros1 { 
+    background-image: linear-gradient(to bottom, #122d5f, #0f234c); 
+}
+
+#aa1 {
+    width: 15%;
+    max-width: 15%;
+}
+
+#aa2 {
+    width: 10%;
+    max-width: 10%;
+}
+
+#aa3 {
+    width: 10%;
+    max-width: 10%;
+}
+
+#aa4 {
+    width: 15%;
+    max-width: 15%;
+}
+
+#aa5 {
+    width: 10%;
+    max-width: 10%;
+}
+
+#aa6 {
+    width: 15%;
+    max-width: 15%;
+}
+
+.overflow {
+    white-space: nowrap; /* Impede que o texto quebre em múltiplas linhas */
+    overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse a largura da div */
+    text-overflow: ellipsis; /* Adiciona reticências (...) ao invés de mostrar o texto que ultrapassa a div */
+}

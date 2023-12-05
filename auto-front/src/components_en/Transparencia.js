@@ -6,7 +6,7 @@ import Footer from './Footer';
 import { useLanguage } from '../LanguageContext';
 import FilterBar2 from './FilterBar2';
 import { parse } from '@fortawesome/fontawesome-svg-core';
-import TransparenciaEn from '../components_en/Transparencia';
+import { Trans } from 'react-i18next';
 
 const { ethers, AbiCoder} = require('ethers');
 
@@ -220,14 +220,12 @@ function Transparencia() {
         marginLeft: '5%'
     }
 
-    if (isEnglish) {
-        return <TransparenciaEn />;
-    }
+    
 
     return (
         <div>
             <Header></Header>
-            <h2 style={titleStyle}>Portal da Transparência</h2>
+            <h2 style={titleStyle}>Transparency Portal</h2>
             <FilterBar2 onFilterChange={handleFilterChange} options={filters}/>
             <ListaCards4 cards={currentCards}></ListaCards4>
             <Footer></Footer>

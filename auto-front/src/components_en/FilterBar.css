@@ -20,6 +20,29 @@
     margin-right: 5px;
 }
 
+.filter-bar2 {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    margin-left: 5%;
+    justify-content: left;
+    align-items: left;
+    background: #ffffff; /* Cor de fundo da barra */
+    padding: 10px;
+    padding-bottom: 20px;
+}
+
+.filter-bar2 label {
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: normal;
+    color: #565656;
+}
+
+.filter-bar2 input[type="checkbox"] {
+    margin-right: 5px;
+}
+
 #tesouroSelic {
     color: #139F7B;;
 }
@@ -52,6 +75,18 @@
     margin-right: 0; /* Remove a margem entre o input e o botão */
 }
 
+.filter-bar2 input[type="search"] {
+    padding: 5px 10px;
+    border: 1px solid #CCCCCC; /* Borda cinza para os inputs */
+    border-radius: 1px; /* Bordas arredondadas */
+    flex-grow: 1;
+    margin-left: 40px;
+    border-top-right-radius: 0; /* Remove a borda arredondada do lado direito do input */
+    border-bottom-right-radius: 0; /* Remove a borda arredondada do lado direito do input */
+    margin-right: 0; /* Remove a margem entre o input e o botão */
+}
+
+
 /* Estilo para o botão de busca */
 .filter-bar .search-button {
     padding: 5px 10px;
@@ -72,5 +107,28 @@
 
 /* Se você está usando FontAwesome, você pode precisar ajustar o tamanho do ícone */
 .filter-bar .fa-search {
+    font-size: 1em;
+}
+
+/* Estilo para o botão de busca */
+.filter-bar2 .search-button {
+    padding: 5px 10px;
+    background: #E0E0E0;
+    border: 1px solid #CCCCCC;
+    border-left: none; /* Remove a borda esquerda para juntar com o campo de busca */
+    border-top-right-radius: 4px; /* Bordas arredondadas somente do lado direito do botão */
+    border-bottom-right-radius: 4px; /* Bordas arredondadas somente do lado direito do botão */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-bar2 .search-button:hover {
+    background: #CCCCCC;
+}
+
+/* Se você está usando FontAwesome, você pode precisar ajustar o tamanho do ícone */
+.filter-bar2 .fa-search {
     font-size: 1em;
 }

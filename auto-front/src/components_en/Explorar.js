@@ -5,8 +5,9 @@ import Header from './Header';
 import ListaCards from './ListaCards';
 import { selectCards } from './SelecionaCards';
 import Footer from './Footer';
+import { useLanguage } from '../LanguageContext';
 
-function Explorar() {
+function ExplorarEn() {
     const [currentCards, setCurrentCards] = useState([]);
 
     // filter bar
@@ -24,10 +25,10 @@ function Explorar() {
 
     // sort bar
     const [sorting, setSorting] = useState({
-        title: '',
-        real_profitability: '',
-        due: '',
-        risk: '',
+        titulo: '',
+        rentabilidade_real: '',
+        vencimento: '',
+        risco: '',
     });
 
     const handleSortChange = (newSorting) => {
@@ -40,15 +41,24 @@ function Explorar() {
         });
     }, [filters, sorting]);
 
+    const titleStyle = {
+        marginBottom: '0',
+        fontSize: '2em',
+        fontWeight: '200',
+        marginLeft: '5%'
+    }
+    
     return (
         <div>
             <Header></Header>
+            <h2 style={titleStyle}>Explore the Titles</h2>
             <SortBar onSortChange={handleSortChange} options={sorting}/>
             <FilterBar onFilterChange={handleFilterChange} options={filters}/>
             <ListaCards cards={currentCards}/>
-            <Footer></Footer>
+            <Footer/>
         </div>
     );
 }
 
-export default Explorar;
+
+export default ExplorarEn;

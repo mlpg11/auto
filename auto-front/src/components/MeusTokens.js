@@ -20,10 +20,10 @@ export function useMetaMaskAccount() {
             // Definir a conta no estado
             setAccount(accounts[0]);
             } catch (error) {
-            console.error('Erro ao obter conta da MetaMask:', error);
+            console.error('Error acessing MetaMask account:', error);
             }
         } else {
-            console.log('MetaMask não está disponível');
+            console.log('MetaMask not available');
         }
         };
 
@@ -62,7 +62,7 @@ function MeusTokens() {
     return (
         <div>
             <Header></Header>
-            <h2 style={titleStyle}>Minha Carteira</h2>
+            <h2 style={titleStyle}>My Wallet</h2>
             <ListaCards3 cards={currentCards}/>
             <Footer></Footer>
         </div>

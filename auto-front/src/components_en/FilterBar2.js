@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './FilterBar.css';
 
-function FilterBar({ onFilterChange, options }) {
+function FilterBar2({ onFilterChange, options }) {
     const [filters, setFilters] = useState(options);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -23,53 +23,61 @@ function FilterBar({ onFilterChange, options }) {
     };
 
     return (
-        <div className="filter-bar">
+        <div className="filter-bar2">
             {/* Checkboxes para filtros */}
-            <label id="tesouroSelic">
+            <label id="tituloComprado">
                 <input
                     type="checkbox"
-                    name="tesouroSelic"
-                    checked={filters.tesouroSelic}
+                    name="Titulo Comprado"
+                    checked={filters.tituloComprado}
                     onChange={handleCheckboxChange}
                 />
-                Selic
+                Bought Title
             </label>
-            <label id="tesouroPrefixado">
+            <label id="tituloResgatado">
                 <input
                     type="checkbox"
-                    name="tesouroPrefixado"
-                    checked={filters.tesouroPrefixado}
+                    name="tituloResgatado"
+                    checked={filters.tituloResgatado}
                     onChange={handleCheckboxChange}
                 />
-                Prefixed
+                Redeemed Title
             </label>
-            <label id="tesouroIPCA">
+            <label id="trocaCriada">
                 <input
                     type="checkbox"
-                    name="tesouroIPCA"
-                    checked={filters.tesouroIPCA}
+                    name="trocaCriada"
+                    checked={filters.trocaCriada}
                     onChange={handleCheckboxChange}
                 />
-                IPCA+
+                Exchange Created
             </label>
-            <label id="tesouroRenda">
+            <label id="trocaAceita">
                 <input
                     type="checkbox"
-                    name="tesouroRenda"
-                    checked={filters.tesouroRenda}
+                    name="trocaAceita"
+                    checked={filters.trocaAceita}
                     onChange={handleCheckboxChange}
                 />
-                Renda+
+                Exchange Accepted
             </label>
-        
-            {/* Campo de busca com botão */}
+            <label id="transferencia">
+                <input
+                    type="checkbox"
+                    name="transferencia"
+                    checked={filters.transferencia}
+                    onChange={handleCheckboxChange}
+                />
+                Transfer
+            </label>
+
             <div className='search-container'>
                 <input
                     id="busca"
                     type="search"
                     value={searchTerm}
                     onChange={handleSearchChange}
-                    placeholder="Search for a title"
+                    placeholder="Search for a wallet"
                 />
                 <button type="submit" className="search-button">
                     <FontAwesomeIcon icon={faSearch} />
@@ -79,4 +87,4 @@ function FilterBar({ onFilterChange, options }) {
     );
 }
     
-export default FilterBar;
+export default FilterBar2;

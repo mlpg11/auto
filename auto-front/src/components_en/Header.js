@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../components/Header.css';
+import './Header.css';
 import logoImage from '../assets/logo.png';
 import iconImage from '../assets/icon.png';
 import { NavLink } from 'react-router-dom';
@@ -15,13 +15,12 @@ function Header() {
   const connectWalletHandler = async () => {
     try {
       if (!connected) {
-        // Tenta conectar com a MetaMask
         await sdk.connect();
       } else {
-        console.log('Já está conectado');
+        console.log('Already connected');
       }
     } catch (error) {
-      console.error('Erro ao conectar com a MetaMask:', error);
+      console.error('Error connecting to MetaMask:', error);
     }
   };
 
@@ -37,41 +36,41 @@ function Header() {
       <img src={logoImage} alt="Logo" className="logo desktop" />
       <img src={iconImage} alt="Icon" className="logo mobile" />
 
-      {/* So disponivel qnd vh < 800*/}
+      {/* Only available when vh < 800 */}
       <button onClick={toggleMenu} className="hamburger-menu">☰</button>
 
-      {/* Navegação */}
+      {/* Navigation */}
       <nav>
         <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           <li>
-            <NavLink to="/explorar" className="nav-link" activeClassName="active">Explorar</NavLink>
+            <NavLink to="/explorar" className="nav-link" activeClassName="active">Explore</NavLink>
           </li>
           <li>
-            <NavLink to="/meus-tokens" className="nav-link" activeClassName="active">Meus tokens</NavLink>
+            <NavLink to="/meus-tokens" className="nav-link" activeClassName="active">My Tokens</NavLink>
           </li>
           <li>
-            <NavLink to="/simular" className="nav-link" activeClassName="active">Simular</NavLink>
+            <NavLink to="/simular" className="nav-link" activeClassName="active">Simulate</NavLink>
           </li>
           <li>
-            <NavLink to="/transparencia" className="nav-link" activeClassName="active">Transparência</NavLink>
+            <NavLink to="/transparencia" className="nav-link" activeClassName="active">Transparency</NavLink>
           </li>
         </ul>
       </nav>
 
-      {/* Botão de Tradução */}
+      {/* Language Button */}
       <div className='lbdiv'>
         <button onClick={toggleLanguage} className="language-button">
           <img className='language-button'
             src={isEnglish ? pt : en} 
-            alt={isEnglish ? "Switch to Portuguese" : "Switch to English"} 
+            alt={isEnglish ? "Mudar para Português" : "Change to English"} 
           />
         </button>
-        <p>{isEnglish ? "Português" : "English"}</p>
+        <p>{isEnglish ? "Portuguese" : "English"}</p>
       </div>
       
-      {/* Botão de Conectar Carteira */}
+      {/* Connect Wallet Button */}
       <button onClick={connectWalletHandler} className="wallet-button">
-        {connected ? 'Conectado' : 'Conectar Carteira'}
+        {connected ? 'Connected' : 'Connect Wallet'}
       </button>
     </header>
   );

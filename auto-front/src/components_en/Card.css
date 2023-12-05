@@ -76,6 +76,7 @@
 
 .fileira1-button {
     border: none;
+    width: 100%;
     background-color: white;
     padding: 10px 20px;
     border-radius: 10px;

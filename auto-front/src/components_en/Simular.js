@@ -8,8 +8,7 @@ import Footer from './Footer';
 import { useLanguage } from '../LanguageContext';
 import Poupanca from './Poupanca';
 
-function Simular() {
-    const { isEnglish } = useLanguage();
+function SimularEn() {
     const [currentCards, setCurrentCards] = useState([]);
     const [poupancaSimAtual, setPoupancaSim] = useState({
         montanteFinal: 0,
@@ -108,7 +107,7 @@ function Simular() {
                 const cards = await getCards();
                 setCurrentCards(currentCards => applySorting(applyFilters(cards, filters), sorting));
             } catch (error) {
-                console.error('Falha ao carregar os cards:', error);
+                console.error('Error loading cards:', error);
             }
         }
 
@@ -120,10 +119,11 @@ function Simular() {
         fontWeight: '200',
         marginLeft: '5%'
     }
+
     return (
         <div>
             <Header></Header>
-            
+            <h2 style={titleStyle}>Simulate your Investment</h2>
             <SimulateBar onSimulate={handleSimulate} />
             <Poupanca montanteFinal={poupancaSimAtual.montanteFinal} totalInvestido={poupancaSimAtual.totalInvestido} ganho={poupancaSimAtual.ganho}/>
             <SortBar onSortChange={handleSortChange} options={sorting} />
@@ -133,4 +133,4 @@ function Simular() {
     );
 }
 
-export default Simular;
+export default SimularEn;

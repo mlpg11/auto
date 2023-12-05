@@ -39,7 +39,7 @@ function SimulateBar({ onSimulate }) {
     return (
         <form onSubmit={handleSubmit} className="simulate-bar">
             <div className="form-group" id="1">
-                <label htmlFor="valorInicial">Valor Inicial</label>
+                <label htmlFor="valorInicial">Initial Value</label>
                 <div className="ig">
                     <input type="number" name="valorInicial" value={simulacao.valorInicial} onChange={handleChange} id="valorInicial" />
                     <p className="roxo">ETH</p>
@@ -47,7 +47,7 @@ function SimulateBar({ onSimulate }) {
             </div>
 
             <div className="form-group" id="1">
-                <label htmlFor="valorMensal">Valor Mensal</label>
+                <label htmlFor="valorMensal">Monthly Value</label>
                 <div className="ig">
                     <input type="number" name="valorMensal" value={simulacao.valorMensal} onChange={handleChange} id="valorMensal" />
                     <p className="roxo">ETH</p>
@@ -55,7 +55,7 @@ function SimulateBar({ onSimulate }) {
             </div>
 
             <div className="form-group" id="2">
-                <label htmlFor="tempoInvestimento">Meses de Investimento</label>
+                <label htmlFor="tempoInvestimento">Months of Investment</label>
                 <div className="ig">
                     <input 
                         type="range" 
