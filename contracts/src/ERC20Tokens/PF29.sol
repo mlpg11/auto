@@ -11,7 +11,7 @@ contract PF29 is Base {
             "prefixado",
             block.timestamp + 6 * 365 days,
             0.00000000302 * 10 ** 12,
-            1.37 * 10 ** 18
+            0.059 * 10 ** 18
         )
     {}
 }

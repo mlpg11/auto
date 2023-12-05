@@ -11,7 +11,7 @@ contract SL26 is Base {
             "selic",
             block.timestamp + 3 * 365 days,
             0.00000000302 * 10 ** 12,
-            0.08 * 10 ** 18
+            1.38 * 10 ** 18
         )
     {}
 }

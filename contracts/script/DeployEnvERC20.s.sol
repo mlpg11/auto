@@ -30,38 +30,38 @@ contract DeployEnvERC20 is Script {
     function run() external {
         vm.startBroadcast();
 
-        sl26 = new SL26();
-        pf29 = new PF29();
-        ipca29 = new IPCA29();
-        ipca35 = new IPCA35();
-        ipca45 = new IPCA45();
-        pf26 = new PF26();
-        renda30 = new RENDA30();
-        renda35 = new RENDA35();
-        renda40 = new RENDA40();
-        sl29 = new SL29();
+         sl26 = new SL26();
+        //pf29 = new PF29();
+        // ipca29 = new IPCA29();
+        // ipca35 = new IPCA35();
+        // ipca45 = new IPCA45();
+        // pf26 = new PF26();
+        // renda30 = new RENDA30();
+        // renda35 = new RENDA35();
+        // renda40 = new RENDA40();
+        // sl29 = new SL29();
 
-        address(payable(sl26)).call{value: 50 ether}("");
-        address(payable(pf29)).call{value: 50 ether}("");
-        address(payable(ipca29)).call{value: 50 ether}("");
-        address(payable(ipca35)).call{value: 50 ether}("");
-        address(payable(ipca45)).call{value: 50 ether}("");
-        address(payable(pf26)).call{value: 50 ether}("");
-        address(payable(renda30)).call{value: 50 ether}("");
-        address(payable(renda35)).call{value: 50 ether}("");
-        address(payable(renda40)).call{value: 50 ether}("");
-        address(payable(sl29)).call{value: 50 ether}("");
+         address(payable(sl26)).call{value: 50 ether}("");
+        //address(payable(pf29)).call{value: 50 ether}("");
+        // address(payable(ipca29)).call{value: 50 ether}("");
+        // address(payable(ipca35)).call{value: 50 ether}("");
+        // address(payable(ipca45)).call{value: 50 ether}("");
+        // address(payable(pf26)).call{value: 50 ether}("");
+        // address(payable(renda30)).call{value: 50 ether}("");
+        // address(payable(renda35)).call{value: 50 ether}("");
+        // address(payable(renda40)).call{value: 50 ether}("");
+        // address(payable(sl29)).call{value: 50 ether}("");
 
-        console2.log("SL26: ", address(sl26));
-        console2.log("PF29: ", address(pf29));
-        console2.log("IPCA29: ", address(ipca29));
-        console2.log("IPCA35: ", address(ipca35));
-        console2.log("IPCA45: ", address(ipca45));
-        console2.log("PF26: ", address(pf26));
-        console2.log("RENDA30: ", address(renda30));
-        console2.log("RENDA35: ", address(renda35));
-        console2.log("RENDA40: ", address(renda40));
-        console2.log("SL29: ", address(sl29));
+         console2.log("SL26: ", address(sl26));
+        //console2.log("PF29: ", address(pf29));
+        // console2.log("IPCA29: ", address(ipca29));
+        // console2.log("IPCA35: ", address(ipca35));
+        // console2.log("IPCA45: ", address(ipca45));
+        // console2.log("PF26: ", address(pf26));
+        // console2.log("RENDA30: ", address(renda30));
+        // console2.log("RENDA35: ", address(renda35));
+        // console2.log("RENDA40: ", address(renda40));
+        // console2.log("SL29: ", address(sl29));
         
         vm.stopBroadcast();
     }
